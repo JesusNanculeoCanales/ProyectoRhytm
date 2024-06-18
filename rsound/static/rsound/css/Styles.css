@@ -1,0 +1,147 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212 !important;
+}
+
+#sidebarToggle {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 1030;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #111;
+    color: #fff;
+    z-index: 1020;
+    display: none; /* Escondido por defecto */
+}
+
+.sidebar-header {
+    padding: 20px;
+    background-color: #121212;
+}
+
+.sidebar .nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .nav-item {
+    width: 100%;
+}
+
+.sidebar .nav-link {
+    padding: 10px 15px;
+    color: #ddd;
+    text-decoration: none;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link:focus {
+    background-color: #666;
+    color: #fff;
+}
+
+.imgartista {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.img-container {
+    width: 100%;
+    max-width: 150px;
+    margin: 0 auto;
+}
+
+.img-container img{
+    width: 100px;
+    height: 100px;
+}
+
+.artistasfavoritos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.artista {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #000000;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: #555555;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+}
+
+.carousel-item {
+    height: 500px;
+}
+
+.card {
+    height: 100%;
+    margin-bottom: 30px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        width: 25%;
+    }
+}
+
+.modal-content {
+    background-color: #151515 !important;
+    color: white !important;
+}
+
+.btn-close-custom {
+    --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") !important;
+}
+
+
+.card-noticia div{
+    margin: 0 !important;
+}

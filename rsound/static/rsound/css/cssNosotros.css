@@ -1,0 +1,70 @@
+body {
+  background-color: #121212;
+  color: #fff;
+}
+
+.about-section {
+  padding: 60px 0;
+}
+
+.about-content {
+  background-color: #1f1f1f;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.about-content h2,
+.about-content p {
+  color: #bbb;
+}
+
+.team-member {
+  margin-bottom: 30px;
+}
+
+.team-member img {
+  border-radius: 50%;
+  margin-bottom: 15px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.team-member h5 {
+  color: #fff;
+}
+
+.team-member p {
+  color: #bbb;
+}
+
+.dias-feriados{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.feriado{
+    background-color: rgb(28, 28, 28) !important;
+    border: 1px solid gray !important;
+    width: 40%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.nombre-feriado{
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.fecha-feriado{
+    color: white;
+    text-align: center;
+}
+
+.container-info-feriados h2{
+    text-align: center;
+    padding: 16px;
+    font-size: 2.4rem;
+}

@@ -1,0 +1,61 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static  %}
+{% block titulo %}
+<title>Rhythm Sound - Nosotros</title>
+{% endblock titulo %}
+ 
+{% block css %}
+<link href="{% static 'rsound/css/cssNosotros.css' %}" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock css %}
+
+{% block Contenido %}
+  <!-- Nosotros Section -->
+  <div class="container">
+    <section class="about-section">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="about-content text-center">
+            <h2>Sobre Nosotros</h2>
+            <p>Somos una comunidad apasionada por la música, comprometida en brindarte las últimas noticias, los mejores
+              descuentos y una plataforma donde puedes conectar con otros fanáticos. Nuestro objetivo es acercarte a tus
+              artistas favoritos y crear un espacio donde la música nos una a todos.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center mt-5">
+        <div class="col-md-4 team-member">
+          <img src="{% static 'rsound/imagenes/Scarlett.png' %}" alt="Miembro del equipo" class="img-fluid">
+          <h5>Scarlett Uribe</h5>
+          <p>Cordinadora Musical</p>
+        </div>
+        <div class="col-md-4 team-member">
+          <img src="{% static 'rsound/imagenes/delfin.png' %}" alt="Miembro del equipo" class="img-fluid">
+          <h5>Jesus Ñanculeo</h5>
+          <p>Desarrollador Web</p>
+        </div>
+        <div class="col-md-4 team-member">
+          <img src="{% static 'rsound/imagenes/Carlos.png' %}" alt="Miembro del equipo" class="img-fluid">
+          <h5>Carlos Solis</h5>
+          <p>Gerente de Relaciones con Artistas y Eventos</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="container-info-feriados">
+          <h2>Los siguientes dias, el local de venta de mercancia estara cerrado 😥</h2>
+          <div class="container-feriados">
+            <div class="dias-feriados" id="feriados_container">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock Contenido %}
+
+  {% block js %}
+  <script src="{% static 'rsound/js/api.js' %}"></script>
+  {% endblock js %}   

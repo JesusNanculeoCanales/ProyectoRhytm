@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blur</title>
+  <link href="../Styles.css" rel="stylesheet">
+  <link href="../Style3.css" rel="stylesheet">
+  <link href="../cssNavbar.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- ICON -->
+  <link rel="icon" type="image/x-icon" href="../imagenes/logo.png" />
+
+</head>
+
+<body>
+  <!-- TOAST DE MENSAJES DE ERRORES -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="texto-toast">
+          Mucho texto
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand color_letra_nav" href="#">RhythmSound</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="nav-link active color_letra_nav color_letra_nav_active" aria-current="page"
+              href="../Index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link color_letra_nav" href="../Novedades.html">Novedades</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle color_letra_nav" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Categorías</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item color_letra_nav" href="../Mercancia.html">Mercancía</a></li>
+              <li><a class="dropdown-item color_letra_nav" href="../listadoArtistas.html">Artistas</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item color_letra_nav" href="../Nosotros.html">Nosotros</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex mx-auto" role="search">
+          <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+          <button class="btn btn-outline-success" type="button" onclick="buscadorBuscar(this)">Buscar</button>
+        </form>
+        <div class="d-flex ms-auto">
+          <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">Iniciar Sesión</button>
+          <button class="btn btn-outline-secondary" type="button"
+            onclick="window.location.href='Registro.html'">Registrarse</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+ <!-- Modal INICIAR SESION -->
+ <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+ aria-labelledby="staticBackdropLabel" aria-hidden="true">
+ <div class="modal-dialog">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h1 class="modal-title fs-5" id="staticBackdropLabel">Iniciar Sesión</h1>
+       <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
+     </div>
+     <form id="formLogin">
+       <div class="modal-body">
+         <label for="emailModal" class="form-label">Correo</label>
+         <input type="email" id="emailModal" class="form-control" required>
+         <label for="passwordModal" class="form-label">Contraseña</label>
+         <input type="password" id="passwordModal" class="form-control" required>
+         <label id="recuperarClave" data-bs-toggle="modal" data-bs-target="#recuperarClaveModal">Recuperar
+           Contraseña</label>
+       </div>
+       <div class="modal-footer">
+         <button type="submit" class="btn btn-primary" id="btnLogin">Iniciar Sesión</button>
+       </div>
+     </form>
+     <div id="loginMessageModal" class="mt-3" style="display: none;">
+       <div class="alert alert-success d-flex align-items-center" role="alert">
+         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+           <use xlink:href="#check-circle-fill" />
+         </svg>
+         <div>Has iniciado sesión con éxito. ✔️</div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+
+  <div class="titulo">
+    <h1>BLUR</h1>
+  </div>
+
+
+  <!-- CAROUSEL -->
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="3000">
+        <img src="../imagenes/Blur1.jpg" class="d-block w-100" alt="First Slide">
+      </div>
+      <div class="carousel-item" data-bs-interval="3000">
+        <img src="../imagenes/Blur2.jpg" class="d-block w-100" alt="Second Slide">
+      </div>
+      <div class="carousel-item" data-bs-interval="3000">
+        <img src="../imagenes/Blur3.jpg" class="d-block w-100" alt="Third Slide">
+      </div>
+    </div>
+  </div>
+
+  <!-- TEXTO -->
+  <div class="text-content">
+    <p>Blur es una banda de rock alternativo británica formada en Londres en 1988. Está formada por el cantante Damon
+      Albarn, el guitarrista Graham Coxon, el bajista Alex James y el baterista Dave Rowntree. Su álbum debut, Leisure
+      (1991), incorporó los sonidos del madchester y el shoegazing. Tras un cambio estilístico influenciado por bandas
+      pop británicas como The Kinks, The Beatles y XTC, Blur lanzó Modern Life Is Rubbish (1993), Parklife (1994) y The
+      Great Escape (1995). Como resultado, la banda ayudó a popularizar el género del britpop y logró una gran fama en
+      el Reino Unido, con la ayuda de una batalla mediática y en las listas de éxitos con la banda rival Oasis en 1995
+      denominada «La batalla del britpop».
+
+      El quinto álbum homónimo, Blur (1997), vio otro cambio estilístico, influenciado por los estilos lo-fi de grupos
+      indie rock estadounidenses, y se convirtió en su tercer álbum que encabezó las listas de éxitos del Reino Unido.
+      Su sencillo «Song 2» trajo a la banda el éxito principal en los Estados Unidos por primera vez. Su siguiente
+      álbum, 13 (1999), vio a la banda experimentar con música electrónica y góspel, y presentó letras más personales de
+      Albarn, donde relata su lucha contra la adicción a la heroína y su ruptura con su exnovia Justine Frischmann,
+      cantante de la banda Elastica. Su séptimo álbum, Think Tank (2003), continuó su experimentación con sonidos
+      electrónicos y también fue moldeado por el creciente interés de Albarn en el hip hop y la música mundial,
+      presentando un trabajo de guitarra más minimalista. Coxon dejó la banda durante las primeras sesiones de grabación
+      de Think Tank, y Blur se disolvió durante varios años después del final de la gira asociada del álbum, con los
+      miembros involucrados en otros proyectos.
+
+      En 2009, Blur se reunió con Coxon en la banda y se embarcó en una gira de reunión europea. En los años siguientes,
+      lanzaron varios sencillos y compilaciones y realizaron giras internacionales. En 2012, recibieron un Brit Award
+      por Contribución a la Industria Musical. Su octavo álbum, The Magic Whip (2015), fue el sexto consecutivo de Blur
+      en encabezar la UK Albums Chart. El grupo estuvo en pausa desde el The Magic Whip Tour, pero en 2023 se reunieron
+      para presentarse en varias fechas en vivo, junto con el lanzamiento de su noveno álbum de estudio The Ballad of
+      Darren.
+      <br>
+    <h2>Álbumes de estudio</h2>
+    1991: Leisure
+    <br>
+    1993: Modern Life Is Rubbish
+    <br>
+    1994: Parklife
+    <br>
+    1995: The Great Escape
+    <br>
+    1997: Blur
+    <br>
+    1999: 13
+    <br>
+    2000: The Best Of
+    <br>
+    2003: Think Tank
+    <br>
+    2015: The Magic Whip
+    <br>
+    2023: The Ballad of Darren
+    <br>
+  </div>
+
+
+  <!-- VIDEO -->
+  <div class="video-wrapper">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/N7LRu232yzM?si=DjyIE2tAxAnTnRgc"
+      title="High and dry" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="../Funciones.js"></script>
+  <script src="../iniciosesion2.js"></script>
+</body>
+
+</html>

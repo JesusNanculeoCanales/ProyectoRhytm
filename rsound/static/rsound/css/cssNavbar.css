@@ -1,0 +1,15 @@
+nav{
+    background-color: #000000;
+}
+
+.color_letra_nav{
+    color: rgb(70, 89, 178) !important;
+}
+
+.color_letra_nav:hover{
+    color: rgb(45, 58, 117) !important;
+}
+
+.color_letra_nav:active{
+    color: rgb(20, 25, 51) !important;
+}

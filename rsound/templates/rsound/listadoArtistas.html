@@ -1,0 +1,26 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static  %}
+{% block titulo %}
+<title>Rhythm Sound - Nosotros</title>
+{% endblock titulo %}
+{% block css %}
+  <link href="{% static 'rsound/css/cssListadoArtistas.css' %}" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  {% endblock css %}
+
+  {% block Contenido %}
+  <div class="container-fluid">
+    <h1>Artistas RhythmSound</h1>
+    <div class="container-artistas">
+        <!-- LISTADO ARTISTAS-->
+        <div class="artistaListado card">
+            <img src="{% static 'rsound/imagenes/gustavo.jpg' %}">
+            <h3>Gustavo Cerati</h3>
+            <div class="btn-ver">
+                <a href="{% url 'cerati' %}"><button class="btn btn-primary">Ver Artista</button></a>
+            </div>
+
+        </div>
+    </div>
+  </div>
+  {% endblock Contenido %}

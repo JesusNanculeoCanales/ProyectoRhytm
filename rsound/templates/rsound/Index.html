@@ -1,0 +1,133 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static  %}
+{% block titulo %}
+<title>RhythmSound</title>
+{% endblock titulo %}
+{% block navbar %}
+<button class="btn btn-primary me-2" id="sidebarToggle">☰</button>
+{% endblock navbar %}
+{% block Contenido %}
+ <!-- Sidebar -->
+ <div class="welcome-message text-center bg-dark text-white py-3">
+  <h1>Bienvenidos a Rhythm Sound</h1>
+  <p>¡Bienvenido a nuestra comunidad musical! Somos tu destino para mantenerte informado con noticias frescas,
+    explorar nuestro mercado y disfrutar de atractivos descuentos para conectar con tus artistas favoritos.</p>
+</div>
+<div class="container-fluid">
+  <div class="d-flex">
+    <nav class="sidebar bg-dark" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Artistas Favoritos</h2>
+      </div>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="listadoArtistas.html">VER TODOS</a>
+        </li>
+        <li class="artistasfavoritos row gx-0">
+          <div class="col-6 text-center p-2">
+            <div class="img-container">
+              <img src="{% static 'rsound/imagenes/thesmiths.jpg' %}" class="imgartista img-fluid rounded-circle" alt="The Smiths">
+            </div>
+            <a href="Artistas/Artista.html" class="nomartista d-block mt-2">The Smiths</a>
+          </div>
+          <div class="col-6 text-center p-2">
+            <div class="img-container">
+              <img src="{% static 'rsound/imagenes/AESPA.jpg' %}" class="imgartista img-fluid rounded-circle" alt="AESPA">
+            </div>
+            <a href="Artistas/Aespa.html" class="nomartista d-block mt-2">AESPA</a>
+          </div>
+          <div class="col-6 text-center p-2">
+            <div class="img-container">
+              <img src="{% static 'rsound/imagenes/Gustavo.jpg' %}" class="imgartista img-fluid rounded-circle" alt="Gustavo Cerati">
+            </div>
+            <a href="{% url 'cerati' %}" class="nomartista d-block mt-2">Gustavo Cerati</a>
+          </div>
+          <div class="col-6 text-center p-2">
+            <div class="img-container">
+              <img src="{% static 'rsound/imagenes/Jungkook.jpg' %}" class="imgartista img-fluid rounded-circle" alt="Jung Kook">
+            </div>
+            <a href="Artistas/Jungkook.html" class="nomartista d-block mt-2">Jung Kook</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">ARTISTAS RECOMENDADOS</a>
+        </li>
+        <li class="artistasfavoritos row gx-0">
+          <div class="col-6 text-center p-2">
+            <div class="img-container">
+              <img src="{% static 'rsound/imagenes/NewJeans.jpg' %}" class="imgartista img-fluid rounded-circle" alt="NewJeans">
+            </div>
+            <a href="Artistas/Newjeans.html" class="nomartista d-block mt-2">NewJeans</a>
+          </div>
+          <div class="col-6 text-center p-2">
+            <div class="img-container">
+              <img src="{% static 'rsound/imagenes/Blur.jpg' %}" class="imgartista img-fluid rounded-circle" alt="Blur">
+            </div>
+            <a href="Artistas/Blur.html" class="nomartista d-block mt-2">Blur</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="flex-grow-1">
+      <!-- Mensaje -->
+
+      <!-- Carousel -->
+      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'rsound/imagenes/theNeighbourhood.jpg' %}" class="d-block w-100 carousel-img" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'rsound/imagenes/Bts.jpg' %}" class="d-block w-100 carousel-img" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'rsound/imagenes/TheStrokes.jpg' %}" class="d-block w-100 carousel-img" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <!-- Cards -->
+      <div class="row mt-3 card-noticia">
+        <div class="col-md-6">
+          <div class="card">
+            <img src="{% static 'rsound/imagenes/interpol.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Interpol vuelve a Chile a celebrar dos de sus álbumes más importantes: 31 de mayo
+              </h5>
+              <p class="card-text">Esta visita servirá para celebrar dos de los discos más importantes de su carrera:
+                Turn On The Bright Lights y Antics.</p>
+              <a href="Evento.html" class="btn btn-primary">Entrar</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <img src="{% static 'rsound/imagenes/Radiohead.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">La canción de Radiohead que “no es mala, es muy mala” según Thom Yorke</h5>
+              <p class="card-text">Thom Yorke tuvo duras palabras para esta canción de The Bends. Descubre a
+                continuación...</p>
+              <a href="Noticia.html" class="btn btn-primary">Entrar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock Contenido %}
+  
+ 
+  
