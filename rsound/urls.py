@@ -1,4 +1,4 @@
-from .views import paginicio, nosotros,listadoartistas,cerati,registrarse
+from .views import paginicio, nosotros,listadoartistas,cerati,mercancia,novedades,registro
 from django.urls import path,include
 
 urlpatterns = [
@@ -6,7 +6,11 @@ urlpatterns = [
     path('nosotros',nosotros,name='nosotros'),
     path('listadoartistas',listadoartistas,name='listadoartistas'),
     path('cerati',cerati,name='cerati'),
+    path('mercancia',mercancia,name='mercancia'),
+    path('novedades',novedades,name='novedades'),
+    path('registro',registro,name='registro'),
+
+
 
     ##funciones
-    path('registrarse',registrarse,name='registrarse')
 ]

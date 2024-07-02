@@ -13,7 +13,14 @@ def listadoartistas(request):
 def cerati(request):
     return render(request,'rsound/artistas/Gustavocerati.html')
 
-def registrarse(request):
-    mensaje={'mensaje':'te registraste'}
-    return render(request,'rsound/Index.html',mensaje)
+def mercancia(request):
+    return render(request,'rsound/Mercancia.html')
+
+def novedades(request):
+    return render(request,'rsound/Novedades.html')
+
+def registro(request):
+    return render(request,'rsound/registro.html')
+
+
 

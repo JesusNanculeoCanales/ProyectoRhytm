@@ -50,13 +50,13 @@
           <a class="nav-link active color_letra_nav color_letra_nav_active" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link color_letra_nav" href="Novedades.html">Novedades</a>
+          <a class="nav-link color_letra_nav" href="{% url 'novedades' %}">Novedades</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle color_letra_nav" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">Categorías</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item color_letra_nav" href="#">Mercancía</a></li>
+            <li><a class="dropdown-item color_letra_nav" href="{% url 'mercancia' %}">Mercancía</a></li>
             <li><a class="dropdown-item color_letra_nav" href="{% url 'listadoartistas' %}">Artistas</a></li>
             <li>
               <hr class="dropdown-divider">
@@ -73,7 +73,7 @@
         <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="modal"
           data-bs-target="#staticBackdrop">Iniciar Sesión</button>
         <button class="btn btn-outline-secondary" type="button"
-          onclick="window.location.href='Registro.html'">Registrarse</button>
+          onclick="window.location.href='{% url 'registro' %}'">Registrarse</button>
       </div>
     </div>
   </div>
