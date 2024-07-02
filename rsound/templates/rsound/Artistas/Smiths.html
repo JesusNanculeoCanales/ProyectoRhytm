@@ -1,0 +1,75 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>THE SMITHS</title>
+{% endblock titulo %}
+
+{% block Contenido %}
+<div class="titulo">
+  <h1>THE SMITHS</h1>
+</div>
+
+<!-- CAROUSEL -->
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="3000">
+      <img src="{% static 'rsound/imagenes/thesmiths1.jpg' %}" class="d-block w-100" alt="First Slide">
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="{% static 'rsound/imagenes/thesmiths2.jpg' %}" class="d-block w-100" alt="Second Slide">
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="{% static 'rsound/imagenes/thesmiths3.jpg' %}" class="d-block w-100" alt="Third Slide">
+    </div>
+  </div>
+</div>
+
+<!-- TEXTO -->
+<div class="text-content">
+  <p>The Smiths fue un grupo inglés de rock alternativo formado en Mánchester en 1982. Estaba integrado por
+    Morrissey (vocalista), Johnny Marr (guitarrista), Andy Rourke (bajista) y Mike Joyce (batería). Ha sido
+    denominada por los críticos como la banda más importante de rock que surgió en la escena de música
+    independiente británica de la década de 1980.
+    <br>
+    <h2>Álbumes de estudio</h2>
+    The Smiths (1984)
+    <br>
+    Meat Is Murder (1985)
+    <br>
+    The Queen Is Dead (1986)
+    <br>
+    Strangeways, Here We Come (1987)
+    <br>
+    <br>
+    <h2>Recopilatorios</h2>
+    Hatful of Hollow (1984)
+    <br>
+    Louder Than Bombs (1987)
+    <br>
+    The World Won't Listen (1987)
+    <br>
+    Best...I (1992)
+    <br>
+    ...Best II (1992)
+    <br>
+    Singles (1995)
+    <br>
+    The Very Best of The Smiths (2001)
+    <br>
+    The Sound of The Smiths (2008)
+    <br>
+    The Smiths Singles Box (2008)
+    <br>
+    The Smiths Complete (2011)
+    </p>
+</div>
+
+<!-- VIDEO -->
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/bEbdpm1o6mY?si=cRrN1i_nbQ_zg2M-"
+    title="Smiths en directo!" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+{% endblock Contenido %}

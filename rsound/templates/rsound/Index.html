@@ -28,13 +28,13 @@
             <div class="img-container">
               <img src="{% static 'rsound/imagenes/thesmiths.jpg' %}" class="imgartista img-fluid rounded-circle" alt="The Smiths">
             </div>
-            <a href="Artistas/Artista.html" class="nomartista d-block mt-2">The Smiths</a>
+            <a href="{% url 'smiths' %}" class="nomartista d-block mt-2">The Smiths</a>
           </div>
           <div class="col-6 text-center p-2">
             <div class="img-container">
               <img src="{% static 'rsound/imagenes/AESPA.jpg' %}" class="imgartista img-fluid rounded-circle" alt="AESPA">
             </div>
-            <a href="Artistas/Aespa.html" class="nomartista d-block mt-2">AESPA</a>
+            <a href="{% url 'aespa' %}" class="nomartista d-block mt-2">AESPA</a>
           </div>
           <div class="col-6 text-center p-2">
             <div class="img-container">
@@ -46,7 +46,7 @@
             <div class="img-container">
               <img src="{% static 'rsound/imagenes/Jungkook.jpg' %}" class="imgartista img-fluid rounded-circle" alt="Jung Kook">
             </div>
-            <a href="Artistas/Jungkook.html" class="nomartista d-block mt-2">Jung Kook</a>
+            <a href="{% url 'jungkook' %}" class="nomartista d-block mt-2">Jung Kook</a>
           </div>
         </li>
         <li class="nav-item">
@@ -57,13 +57,13 @@
             <div class="img-container">
               <img src="{% static 'rsound/imagenes/NewJeans.jpg' %}" class="imgartista img-fluid rounded-circle" alt="NewJeans">
             </div>
-            <a href="Artistas/Newjeans.html" class="nomartista d-block mt-2">NewJeans</a>
+            <a href="{% url 'newjeans' %}" class="nomartista d-block mt-2">NewJeans</a>
           </div>
           <div class="col-6 text-center p-2">
             <div class="img-container">
               <img src="{% static 'rsound/imagenes/Blur.jpg' %}" class="imgartista img-fluid rounded-circle" alt="Blur">
             </div>
-            <a href="Artistas/Blur.html" class="nomartista d-block mt-2">Blur</a>
+            <a href="{% url 'blur' %}" class="nomartista d-block mt-2">Blur</a>
           </div>
         </li>
       </ul>
@@ -108,7 +108,7 @@
               </h5>
               <p class="card-text">Esta visita servirá para celebrar dos de los discos más importantes de su carrera:
                 Turn On The Bright Lights y Antics.</p>
-              <a href="Evento.html" class="btn btn-primary">Entrar</a>
+              <a href="{% url 'evento' %}" class="btn btn-primary">Entrar</a>
             </div>
           </div>
         </div>
@@ -119,7 +119,7 @@
               <h5 class="card-title">La canción de Radiohead que “no es mala, es muy mala” según Thom Yorke</h5>
               <p class="card-text">Thom Yorke tuvo duras palabras para esta canción de The Bends. Descubre a
                 continuación...</p>
-              <a href="Noticia.html" class="btn btn-primary">Entrar</a>
+              <a href="{% url 'noticia' %}" class="btn btn-primary">Entrar</a>
             </div>
           </div>
         </div>
