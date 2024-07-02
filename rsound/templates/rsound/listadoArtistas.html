@@ -1,25 +1,34 @@
 {% extends 'rsound/Plantilla.html' %}
-{% load static  %}
+{% load static %}
 {% block titulo %}
 <title>Rhythm Sound - Nosotros</title>
 {% endblock titulo %}
 {% block css %}
-  <link href="{% static 'rsound/css/cssListadoArtistas.css' %}" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  {% endblock css %}
+<link href="{% static 'rsound/css/cssListadoArtistas.css' %}" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock css %}
 
-  {% block Contenido %}
-  <div class="container-fluid">
-    <h1>Artistas RhythmSound</h1>
-    <div class="container-artistas">
-        <!-- LISTADO ARTISTAS-->
-        <div class="artistaListado card">
-            <img src="{% static 'rsound/imagenes/gustavo.jpg' %}">
-            <h3>Gustavo Cerati</h3>
-            <div class="btn-ver">
-                <a href="{% url 'cerati' %}"><button class="btn btn-primary">Ver Artista</button></a>
-            </div>
-        </div>
+{% block Contenido %}
+<div class="container-fluid">
+  <h1>Artistas RhythmSound</h1>
+  <div class="container-artistas">
+    <!-- LISTADO ARTISTAS-->
+    <div class="artistaListado card">
+      <img src="{% static 'rsound/imagenes/cerati1.jpg' %}">
+      <h3>Gustavo Cerati</h3>
+      <div class="btn-ver">
+        <a href="{% url 'cerati' %}"><button class="btn btn-primary">Ver Artista</button></a>
+      </div>
+    </div>
+    <div class="artistaListado card">
+      <img src="{% static 'rsound/imagenes/blur1.jpg' %}">
+      <h3>Blur</h3>
+      <div class="btn-ver">
+        <a href="{% url 'blur' %}"><button class="btn btn-primary">Ver Artista</button></a>
+      </div>
     </div>
   </div>
-  {% endblock Contenido %}
+</div>
+
+
+{% endblock Contenido %}

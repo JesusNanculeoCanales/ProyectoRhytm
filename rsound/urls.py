@@ -17,7 +17,4 @@ urlpatterns = [
     path('newjeans',newjeans,name='newjeans'),
     path('aespa',aespa,name='aespa'),
 
-
-
-    ##funciones
 ]
