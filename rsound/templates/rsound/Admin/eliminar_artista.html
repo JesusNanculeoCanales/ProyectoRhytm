@@ -1,0 +1,13 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block Contenido %}
+  <div class="container mt-4">
+    <h2>¿Estás seguro de que quieres eliminar a {{ artista.nombreArtista }}?</h2>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Eliminar</button>
+      <a href="{% url 'listadoartistas' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+{% endblock Contenido %}

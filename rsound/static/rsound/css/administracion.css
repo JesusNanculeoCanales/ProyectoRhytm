@@ -1,0 +1,317 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212 !important;
+    color: #ddd; /* Ajustar color del texto para mejor visibilidad */
+}
+
+#sidebarToggle {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 1030;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #111;
+    color: #fff;
+    z-index: 1020;
+    display: none; /* Escondido por defecto */
+}
+
+.sidebar-header {
+    padding: 20px;
+    background-color: #121212;
+}
+
+.sidebar .nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .nav-item {
+    width: 100%;
+}
+
+.sidebar .nav-link {
+    padding: 10px 15px;
+    color: #ddd;
+    text-decoration: none;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link:focus {
+    background-color: #1e90ff;
+    color: #fff;
+}
+
+/* ARTISTAS */
+.artista {
+    background-color: #1e1e1e;
+    border-radius: 2px;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 15px;
+    width: 100%;
+    border: 1px solid #333;
+}
+
+.artista img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.artista p {
+    font-size: 18px;
+    padding-right: 15px;
+}
+
+/* FIN ARTISTAS */
+
+.adminBotones a {
+    padding: 10px;
+    margin: 10px;
+    color: rgb(0, 0, 0) !important;
+}
+
+.selectorCategorias {
+    width: 90%;
+    margin-left: 5%;
+    border: 1px solid #007bff !important;
+}
+
+.btnFiltrar {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+}
+
+.usuarios p {
+    font-size: 22px !important;
+}
+
+.color-rol {
+    color: #007bff;
+}
+
+.administracion {
+    background-color: #1e1e1e;
+    width: 90%;
+    margin-left: 5%;
+    min-height: 400px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.container-full{
+    width: 99%;
+}
+
+.textoadmin {
+    margin-top: 40px;
+    margin-left: 15%;
+    width: 70%;
+    color: #1e90ff;
+}
+
+.container-datos2 {
+    margin-top: 30px;
+    margin-left: 20%;
+    width: 60%;
+}
+
+.navegador {
+    text-align: center;
+    width: 100%;
+    padding: 0;
+}
+
+.navegador .barranav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.barranav {
+    position: sticky !important;
+}
+
+.barranav ul a li {
+    background-color: #1e90ff;
+    color: #fff !important;
+    font-size: 20px;
+    display: block;
+    padding: 10px 18px;
+    text-decoration: none;
+}
+
+.barranav ul a:hover {
+    color: #000000 !important;
+}
+
+.barranav ul a li:hover {
+    color: #c5c5c5 !important;
+}
+
+.navegador .barranav ul li {
+    border: 1px solid #000000;
+}
+
+.container-datos {
+    text-align: center;
+}
+
+.custom-file input {
+    overflow: hidden;
+}
+
+.lista {
+    margin-bottom: 25px;
+}
+
+.botonfiguras {
+    margin-top: 30px;
+}
+
+.botonfiguras .boton {
+    border-radius: 8px;
+    font-size: 30px;
+    margin-left: 25%;
+    margin-top: 20px;
+    padding: 30px;
+    width: 50%;
+    background-color: #0050a0;
+    margin-bottom: 30px;
+}
+
+.botonfiguras .boton a {
+    color: white !important;
+}
+
+.datos h3 {
+    padding: 0px 0px 0px 10px;
+    width: 50%;
+    background-color: #0050a0;
+    color: #fff;
+    font-size: 20px;
+}
+
+.datos div div p {
+    font-size: 20px;
+}
+
+.botones {
+    margin-bottom: 10px;
+}
+
+.container-imagenes-input {
+    display: flex;
+    justify-content: space-between;
+}
+
+.imagenes-input .custom-file {
+    width: 90%;
+    overflow: hidden;
+}
+
+.imagenes-input img {
+    width: 90%;
+    height: 200px;
+}
+
+.custom-file-input ~ .custom-file-label::after {
+    content: "Elegir";
+}
+
+
+
+.container2{
+padding: 0!important;
+}
+
+
+@media (max-width: 771px) {
+    .container2 {
+        margin-top: 50px;
+        padding: 0;
+        width: 100%;
+    }
+
+    .textoadmin {
+        margin-top: 10px;
+        margin-left: 2.5%;
+        width: 95%;
+    }
+
+    .navegador .barranav ul {
+        display: block;
+        padding: 0;
+        width: 100%;
+    }
+
+    .navegador .barranav ul li {
+        font-size: 15px;
+        padding: 10px;
+        margin: 0;
+        width: 100%;
+    }
+
+    .navegador .barranav ul a {
+        padding: 0;
+        margin: 0;
+    }
+
+    .botonfiguras .boton {
+        font-size: 25px;
+        margin-left: 10%;
+        width: 80%;
+    }
+
+    .administracion {
+        margin-top: 20px;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .artista {
+        flex-wrap: wrap;
+    }
+
+    .artista img {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .artista h3 p {
+        padding: 0;
+        margin: 0;
+    }
+
+    .artista h3 {
+        width: 100%;
+        padding: 0;
+    }
+
+    .artista p {
+        font-size: 30px;
+        padding: 0;
+    }
+}

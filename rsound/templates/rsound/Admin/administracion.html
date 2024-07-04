@@ -1,0 +1,58 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+<!--CSS-->
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/administracion.css' %}">
+{% endblock css %}
+
+{% block titulo %}
+<title>Admin - Artistas</title>
+{% endblock titulo %}
+
+{% block Contenido %}
+    <!-- MODIFICAR PERFIL-->
+    <div class="row fondogeneralosos">
+        <!-- NAVEGACION ADMIN-->
+        <div class="col-md-3 col-sm-12 col-12">
+            <div class="navegador">
+                <nav class="barranav">
+                    <ul>
+                        <a href="{% url 'administracion' %}">
+                            <li>Inicio Administrador</li>
+                        </a>
+                        <a href="{% url 'adminartistas' %}">
+                            <li>Administrar Artistas</li>
+                        </a>
+                        <a href="{% url 'adminusuario' %}">
+                            <li>Administrar Usuarios</li>
+                        </a>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- FIN NAVEGACION ADMIN-->
+
+        <!--ADMINISTRAR-->
+        <div class="col-md-9 col-sm-12 col-12 container2">
+            <!--MODIFICAR DATOS-->
+            <div class="col-md-12">
+                <div class="container-editar">
+                    <div class="container-datos administracion">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="textoadmin">
+                                    <h3 class="titulo">Bienvenido Administrador</h3>
+                                    <h4>En esta sección podrás administrar todos los
+                                        artistas y los usuarios que se han registrado en la base de datos.</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--FIN CONTAINER EDITAR-->
+            </div><!--FIN MODIFICAR DATOS-->
+        </div>
+        <!-- FIN ADMINISTRAR-->
+    </div>
+    <!-- FIN MODIFICAR PERFIL-->
+{% endblock Contenido %}

@@ -1,0 +1,65 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Admin - RhythmSound</title>
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/administracion.css' %}">
+{% endblock css %}
+
+{% block Contenido %}
+<!-- MODIFICAR PERFIL-->
+<div class="row container-full">
+  <!-- NAVEGACION ADMIN-->
+  <div class="col-md-3 col-sm-12 col-12">
+    <div class="navegador">
+      <nav class="barranav">
+        <ul>
+          <a href="{% url 'administracion' %}">
+            <li>Inicio Administrador</li>
+          </a>
+          <a href="{% url 'adminartistas' %}">
+            <li>Administrar Artistas</li>
+          </a>
+          <a href="{% url 'adminusuario' %}">
+            <li>Administrar Usuarios</li>
+          </a>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- FIN NAVEGACION ADMIN-->
+
+  <!--ADMINISTRAR-->
+  <div class="col-md-9 col-sm-12 col-12 container2">
+    <!--MODIFICAR DATOS-->
+    <div class="col-md-12 ">
+      <div class="container-editar">
+        <div class="container-datos administracion">
+          <h4 id="titulo">Administrar Usuarios</h4>
+          <div class="row botonfiguras">
+            <div class="col-md-12">
+              <div class="boton">
+                <a href="{% url 'crear_usuario' %}">Crear Usuarios</a>
+              </div>
+            </div>
+          </div>
+          <div class="row botonfiguras">
+            <div class="col-md-12">
+              <div class="boton">
+                <a href="{% url 'listado_usuario' %}">Listado Usuarios</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--FIN CONTAINER EDITAR-->
+    </div>
+    <!--FIN MODIFICAR DATOS-->
+  </div>
+  <!-- FIN ADMINISTRAR-->
+</div>
+<!-- FIN MODIFICAR PERFIL-->
+{% endblock Contenido %}

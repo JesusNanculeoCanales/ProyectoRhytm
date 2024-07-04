@@ -1,6 +1,8 @@
+const form_registro =document.getElementById("registroForm")
 const btnregistro = document.getElementById("btnregistro")
 
 function registrarUsuario(elemento) {
+   
     var formRegistroValido = true;
     
     const nombre = document.getElementById('name').value;
@@ -43,6 +45,7 @@ function registrarUsuario(elemento) {
         if (formRegistroValido && validacionClave && validacionCorreo){
             aparecerCarga()
             toastTextoColor('Registrado 😘', 1)
+            form_registro.submit()
         }
     }
 }

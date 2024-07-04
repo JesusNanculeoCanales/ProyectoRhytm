@@ -1,0 +1,14 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block Contenido %}
+  <div class="container mt-4">
+    <h2>Editar Artista</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Actualizar</button>
+      <a href="{% url 'listadoartistas' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+{% endblock contenido %}

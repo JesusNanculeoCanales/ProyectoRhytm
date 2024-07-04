@@ -1,0 +1,21 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Crear Artista - RhythmSound</title>
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/administracion.css' %}">
+{% endblock css %}
+
+{% block Contenido %}
+<div class="container">
+    <h2>Crear Artista</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+{% endblock Contenido %}

@@ -19,7 +19,7 @@
     <!-- FORMULARIO -->
     <h2 class="colorblanco centrado">Formulario de Registro</h2>
     <div class="fondoform">
-      <form id="registroForm" action="/submit_registration" method="post">
+      <form id="registroForm" action="{% url 'registrar_usuario' %}" method="post">
         {% csrf_token %}
         <div class="mb-3">
           <label for="name" class="form-label colorblanco">Nombres:</label>

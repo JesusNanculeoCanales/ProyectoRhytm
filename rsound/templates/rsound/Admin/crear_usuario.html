@@ -1,0 +1,71 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static  %}
+
+{% block titulo %}
+  <title>CrearUsuario - RhythmSound</title>
+{% endblock titulo %}
+
+{% block css %}
+<link href="{% static 'rsound/css/Style2.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block Contenido %}
+
+  <!-- Funcion spinner carga registro -->
+  <div class="spinner-border" id="spinner" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="fondospinner" id="fondito"></div>
+  <div class="container mt-5">
+    <!-- FORMULARIO -->
+    <h2 class="colorblanco centrado">Formulario de Registro</h2>
+    <div class="fondoform">
+      <form id="registroForm" action="{% url 'registrar_usuario' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="name" class="form-label colorblanco">Nombres:</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="apellido" class="form-label colorblanco">Apellidos:</label>
+          <input type="text" class="form-control" id="apellido" name="apellido" required>
+        </div>
+        <div class="mb-3">
+          <label for="nickname" class="form-label colorblanco">Nombre de usuario:</label>
+          <input type="text" class="form-control" id="nickname" name="nickname" required>
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label colorblanco">Telefono (+56):</label>
+          <input type="number" class="form-control" id="telefono" name="telefono" required oninput="limitarInput.call(this, 9)">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label colorblanco">Correo Electrónico:</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label colorblanco">Contraseña:</label>
+          <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="mb-3">
+          <label for="password2" class="form-label colorblanco"> Repetir Contraseña:</label>
+          <input type="password" class="form-control" id="password2" name="password2" required>
+        </div>
+        <div class="mb-3">
+        <label for="password2" class="form-label colorblanco"> Rol:</label>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Elige un rol</option>
+          {% for r in roles %}
+          <option value="{{r.idRol}}">{{ r.nombreRol }}</option>
+          {% endfor %}
+        </select>
+      </div>
+        <button type="button" class="btn btn-primary" id="btnregistro" onclick="registrarUsuario(this)">Registrarse</button>
+      </form>
+    </div>
+  </div>
+{% endblock Contenido %}
+
+
+{% block js %}
+<script src="{% static 'rsound/js/validacionesRegistro.js' %}" defer></script>
+{% endblock js %}

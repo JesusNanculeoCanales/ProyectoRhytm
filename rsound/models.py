@@ -15,7 +15,7 @@ class Usuario(models.Model):
     numero_telefonico = models.CharField(max_length=20, verbose_name="Número Telefónico (+56)", default='0000000000')
     correo = models.EmailField(max_length=40)
     contraseña = models.CharField(max_length=128)  
-    fechacreacion = models.DateField(verbose_name='Fecha de creación')
+    fechacreacion = models.DateField(verbose_name='Fecha de creación', auto_now_add=True)
     rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
