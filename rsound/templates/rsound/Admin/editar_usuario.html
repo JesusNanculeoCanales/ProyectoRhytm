@@ -1,0 +1,64 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Editar Usuario - RhythmSound</title>
+{% endblock titulo %}
+
+{% block css %}
+<link href="{% static 'rsound/css/Style2.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block Contenido %}
+  <div class="container mt-5">
+    <!-- Botón Volver -->
+    <div class="mb-3">
+      <a href="{% url 'listado_usuario' %}" class="btn btn-secondary">Volver</a>
+    </div>
+    <!-- FORMULARIO -->
+    <h2 class="colorblanco centrado">Editar Usuario</h2>
+    <div class="fondoform">
+      <form id="editarForm" action="{% url 'editar_usuario_funcion' usuario.idUsuario %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="name" class="form-label colorblanco">Nombres:</label>
+          <input type="text" class="form-control" id="name" name="name" value="{{ usuario.nombre }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="apellido" class="form-label colorblanco">Apellidos:</label>
+          <input type="text" class="form-control" id="apellido" name="apellido" value="{{ usuario.apellidos }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="nickname" class="form-label colorblanco">Nombre de usuario:</label>
+          <input type="text" class="form-control" id="nickname" name="nickname" value="{{ usuario.nombreUsuario }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label colorblanco">Correo Electrónico:</label>
+          <input type="email" class="form-control" id="email" name="email" value="{{ usuario.correo }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label colorblanco">Número teléfonico (+56):</label>
+          <input type="number" class="form-control" id="telefono" name="telefono" value="{{ usuario.numero_telefonico }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label colorblanco">Contraseña (dejar en blanco para no cambiar):</label>
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <div class="mb-3">
+          <label for="rol" class="form-label colorblanco"> Rol:</label>
+          <select class="form-select" aria-label="Default select example" name="rol">
+            <option selected>Elige un rol</option>
+            {% for rol in roles %}
+              {% if rol == usuario.rol %}
+                <option value="{{rol.idRol}}" selected>{{ rol.nombreRol }}</option>
+              {% else %}
+              <option value="{{rol.idRol}}">{{ rol.nombreRol }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" id="btneditar">Guardar Cambios</button>
+      </form>
+    </div>
+  </div>
+{% endblock Contenido %}

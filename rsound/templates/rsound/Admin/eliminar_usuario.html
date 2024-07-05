@@ -1,0 +1,26 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Eliminar Usuario - RhythmSound</title>
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/administracion.css' %}">
+{% endblock css %}
+
+{% block Contenido %}
+<div class="container mt-5">
+    <!-- Botón Volver -->
+    <div class="mb-3">
+      <a href="{% url 'adminusuario' %}" class="btn btn-secondary">Volver</a>
+    </div>
+    <h2 class="colorblanco centrado">Eliminar Usuario</h2>
+    <p class="colorblanco">¿Estás seguro de que deseas eliminar al usuario {{ usuario.username }}?</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'listado_usuario' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock Contenido %}

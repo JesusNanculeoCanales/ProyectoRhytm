@@ -11,32 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    var formLogin = document.getElementById('formLogin');
-    if (formLogin) {
-        formLogin.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
-            
-            // Obtener valores del formulario
-            const email = document.getElementById('emailModal').value;
-            const password = document.getElementById('passwordModal').value;
-            
-            // Validar Correo y Clave
-            const validacionCorreo = validarFormatoCorreo(email);
-            const validacionClave = validarClave(password);
-            
-            // Simular el inicio de sesión si ambas validaciones son correctas
-            if (validacionCorreo && validacionClave) {
-                // Mostrar mensaje de éxito
-                document.getElementById('loginMessageModal').style.display = 'block';
-                // Redirigir a la página de inicio después de 2 segundos
-                setTimeout(function() {
-                    window.location.href = "index.html";
-                }, 2000);
-            } else {
-                alert('Por favor, completa todos los campos correctamente.');
-            }
-        });
-    }
+   
 });
 
 // Funciones de validación

@@ -1,0 +1,86 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+  <title>Admin - Listado de Artistas</title>
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/administracion.css' %}">
+{% endblock css %}
+
+{% block Contenido %}
+<!-- MODIFICAR PERFIL-->
+<div class="row fondogeneralosos">
+    <!-- NAVEGACION ADMIN-->
+    <div class="col-md-3 col-sm-12 col-12">
+        <div class="navegador">
+            <nav class="barranav">
+                <ul>
+                    <a href="{% url 'administracion' %}">
+                        <li>Inicio Administrador</li>
+                    </a>
+                    <a href="{% url 'adminartistas' %}">
+                        <li>Administrar Artistas</li>
+                    </a>
+                    <a href="{% url 'adminusuario' %}">
+                        <li>Administrar Usuarios</li>
+                    </a>
+                    <a href="{% url 'adminevento' %}">
+                        <li>Administrar Eventos</li>
+                    </a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- FIN NAVEGACION ADMIN-->
+
+    <!--ADMINISTRAR-->
+    <div class="col-md-9 col-sm-12 col-12 ">
+        <!--MODIFICAR DATOS-->
+        <div class="col-md-12 administracion">
+            <div class="container-editar">
+                <div class="container-datos">
+                    <h4 id="titulo">Administrar Artistas</h4>
+                    <div class="row botonfiguras">
+                        <div class="col-md-12">
+                            <div class="boton">
+                                <a href="{% url 'crear_artista' %}">Crear Artista</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-dark table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre de artista</th>
+                                        <th>Imagen Artista</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for artista in arte %}
+                                    <tr>
+                                        <td>{{ artista.idArtista }}</td>
+                                        <td>{{ artista.nombreArtista }}</td>
+                                        <td><img src="{{ artista.imagen.url }}" alt="{{ artista.nombreArtista }}" style="width: 50px; height: auto;"></td>
+                                        <td>
+                                            <a href="{% url 'editar_artista' artista.idArtista %}" class="btn btn-primary btn-sm">Editar</a>
+                                            <a href="{% url 'eliminar_artista' artista.idArtista %}" class="btn btn-danger btn-sm">Borrar</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div><!--FIN CONTAINER EDITAR-->
+        </div><!--FIN MODIFICAR DATOS-->
+    </div>
+    <!-- FIN ADMINISTRAR-->
+</div>
+<!-- FIN MODIFICAR PERFIL-->
+{% endblock Contenido %}

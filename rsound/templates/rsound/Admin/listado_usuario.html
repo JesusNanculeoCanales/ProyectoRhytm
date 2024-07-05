@@ -10,6 +10,18 @@
 {% endblock css %}
 
 {% block Contenido %}
+
+  <!-- MENSAJES-->
+  {% if messages %}
+  <div class="mensajes-fondo-opaco">
+      <ul class="texto-mensaje">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+
+      </ul>
+  </div>
+  {% endif %}
 <!-- MODIFICAR PERFIL-->
 <div class="row fondogeneralosos">
     <!-- NAVEGACION ADMIN-->
@@ -25,6 +37,9 @@
                     </a>
                     <a href="{% url 'adminusuario' %}">
                         <li>Administrar Usuarios</li>
+                    </a>
+                    <a href="{% url 'adminevento' %}">
+                        <li>Administrar Eventos</li>
                     </a>
                 </ul>
             </nav>
@@ -45,18 +60,8 @@
                                 <a href="{% url 'crear_usuario' %}">Crear Usuarios</a>
                             </div>
                         </div>
-                        <!-- Selector -->
                         <form action="{% url 'adminusuario' %}" method="post">
                             {% csrf_token %}
-                            <div>
-                                <select class="form-select selectorCategorias" aria-label="Default select example" name="rolFiltrado" required>
-                                    <option value="0">Todos los Usuarios</option>
-                                    {% for c in roles %}
-                                    <option value="{{ c.idRol }}">{{ c.nombreRol }}</option>
-                                    {% endfor %}
-                                </select>
-                                <button type="submit" class="btn btnFiltrar btn-primary">Filtrar</button>
-                            </div>
                             <div class="lista">
                                 <table class="table table-dark table-striped">
                                     <thead>
@@ -76,8 +81,8 @@
                                             <td>{{ usuario.correo }}</td>
                                             <td>{{ usuario.rol.nombreRol }}</td>
                                             <td>
-                                                <a href="#" class="btn btn-primary btn-sm">Editar</a>
-                                                <a href="#" class="btn btn-danger btn-sm">Borrar</a>
+                                                <a href="{% url 'pagEditar_usuario' usuario.idUsuario %}" class="btn btn-primary btn-sm">Editar</a>
+                                                <a href="{% url 'eliminar_usuario' usuario.idUsuario %}" class="btn btn-danger btn-sm">Borrar</a>
                                             </td>
                                         </tr>
                                         {% endfor %}

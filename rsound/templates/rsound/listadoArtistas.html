@@ -11,33 +11,4 @@
 {% block Contenido %}
 <div class="container-fluid">
   <h1>Artistas RhythmSound</h1>
-
-  <!-- Botón para agregar un nuevo artista -->
-  <div class="mb-3">
-    <a href="{% url 'crear_artista' %}" class="btn btn-success">Agregar Artista</a>
-  </div>
-
-  <div class="container-artistas">
-    <!-- LISTADO ARTISTAS-->
-    {% for artista in artistas %}
-    <div class="artistaListado card">
-      <img src="{{ artista.imagen.url }}" alt="{{ artista.nombreArtista }}">
-      <h3>{{ artista.nombreArtista }}</h3>
-      <div class="btn-ver">
-        <a href="{% url 'artista_detalle' artista.idArtista %}">
-          <button class="btn btn-primary">Ver Artista</button>
-        </a>
-      </div>
-      <!-- Botones para editar y borrar -->
-      <div class="mt-2">
-        <a href="{% url 'editar_artista' artista.idArtista %}" class="btn btn-warning">Editar</a>
-        <form action="{% url 'eliminar_artista' artista.idArtista %}" method="post" style="display:inline;">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Borrar</button>
-        </form>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-</div>
 {% endblock Contenido %}

@@ -1,13 +1,27 @@
 {% extends 'rsound/Plantilla.html' %}
 {% load static %}
 
+{% block titulo %}
+<title>Eliminar Artista - RhythmSound</title>
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/administracion.css' %}">
+{% endblock css %}
+
 {% block Contenido %}
-  <div class="container mt-4">
-    <h2>¿Estás seguro de que quieres eliminar a {{ artista.nombreArtista }}?</h2>
-    <form method="post">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Eliminar</button>
-      <a href="{% url 'listadoartistas' %}" class="btn btn-secondary">Cancelar</a>
-    </form>
+
+<div class="container mt-5">
+    <!-- CONFIRMAR ELIMINACIÓN -->
+    <h2 class="colorblanco centrado">Eliminar Artista/Banda</h2>
+    <div class="fondoform">
+      <p class="colorblanco">¿Estás seguro de que deseas eliminar el artista/banda <strong>{{ artista.nombreArtista }}</strong>?</p>
+      <form action="{% url 'eliminar_artista' artista.idArtista %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'adminartistas' %}" class="btn btn-secondary">Cancelar</a>
+      </form>
+    </div>
   </div>
+
 {% endblock Contenido %}

@@ -10,12 +10,44 @@
 {% endblock css %}
 
 {% block Contenido %}
-<div class="container">
-    <h2>Crear Artista</h2>
-    <form method="post">
+
+  <div class="container mt-5">
+    <!-- Botón Volver -->
+    <div class="mb-3">
+      <a href="{% url 'adminartistas' %}" class="btn btn-secondary">Volver</a>
+    </div>
+    <!-- FORMULARIO -->
+    <h2 class="colorblanco centrado">Registro Artista/Banda</h2>
+    <div class="fondoform">
+      <form id="registroForm" action="{% url 'registrar_artista' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </form>
-</div>
+        <div class="mb-3">
+          <label for="name" class="form-label colorblanco">Nombre Artista/Banda:</label>
+          <input type="text" class="form-control" id="nameartista" name="nameartista" required>
+        </div>
+        <div class="mb-3">
+          <label for="apellido" class="form-label colorblanco">Imagen:</label>
+          <input type="file" class="form-control" id="imagen" name="imagen" required>
+        </div>
+        <div class="mb-3">
+          <label for="nickname" class="form-label colorblanco">Biografia:</label>
+          <textarea type="text" class="form-control" id="biografia" name="biografia" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="nickname" class="form-label colorblanco">Discografia:</label>
+            <textarea type="text" class="form-control" id="discos" name="discos" required></textarea>
+          </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label colorblanco">Recopilatorio:</label>
+          <textarea type="text" class="form-control" id="recopilatorio" name="recopilatorio" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label colorblanco">Video/evento:</label>
+          <input type="url" class="form-control" id="video" name="video" required>
+        </div>
+      </div>
+        <button type="submit" class="btn btn-primary" id="btnregistro">Registrarse</button>
+      </form>
+    </div>
+  </div>
 {% endblock Contenido %}

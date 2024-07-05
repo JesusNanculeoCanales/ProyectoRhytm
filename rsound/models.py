@@ -28,6 +28,7 @@ class Usuario(models.Model):
 class Artista(models.Model):
     idArtista = models.AutoField(primary_key=True, verbose_name='Id de Artista')
     nombreArtista = models.CharField(max_length=100)
+    imagen= models.ImageField(null=True,upload_to="rsound")
     biografiaArtista = models.TextField()
     discografiaArtista = models.TextField()
     recopilatorioArtista = models.TextField()
@@ -51,13 +52,7 @@ class Favorito(models.Model):
 
     def __str__(self):
         return f"Favorito de {self.usuario.nombreUsuario} - {self.artista.nombreArtista}"
-    
-class Foto(models.Model):
-    artista = models.ForeignKey(Artista, on_delete=models.CASCADE, related_name='fotos')
-    imagen = models.ImageField(upload_to='fotos_artistas/')
 
-    def __str__(self):
-        return f"Foto de {self.artista.nombreArtista}"
     
 
 
