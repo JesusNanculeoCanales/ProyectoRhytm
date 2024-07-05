@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.utils import timezone
 from .forms import ArtistaForm, RegistroForm, LoginForm
-from .models import Artista, Usuario, Rol
+from .models import Artista, Usuario, Rol, Evento
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
@@ -127,6 +127,7 @@ def listado_artista(request):
     }
     return render(request, 'rsound/Admin/listado_artista.html',contexto)
 
+
 def listado_usuario(request):
     roles=Rol.objects.all()
     usuario=Usuario.objects.all()
@@ -138,6 +139,14 @@ def listado_usuario(request):
 
 
 def crear_usuario(request):
+    roles=Rol.objects.all()
+    contexto={
+        "roles":roles
+    }
+    return render(request, 'rsound/Admin/crear_usuario.html',contexto)
+
+
+def crear_evento(request):
     roles=Rol.objects.all()
     contexto={
         "roles":roles
@@ -157,8 +166,6 @@ def pagEditar_usuario(request, id_usuario):
     return render(request, 'rsound/Admin/editar_usuario.html', contexto)
 
 ## funciones
-
-
 
 def logout_view(request):
     logout(request)
@@ -231,9 +238,6 @@ def registrar_usuario_admin(request):
     user.save()
 
     return redirect('adminusuario')
-
-
-
 
 def registrar_artista(request):
     nombreArt = request.POST['nameartista']         
@@ -380,10 +384,6 @@ def iniciar_sesion(request):
     else:
         return redirect('inicio')
 
-
-
-
-
 #FUNCION EXTRA
 def es_admin_funcion(request):
     user = request.user
@@ -398,4 +398,49 @@ def es_admin_funcion(request):
         es_admin = False
 
     return es_admin
+
+
+## FUNCIONES PARA FUNCIONAMIENTO MODEL EVENTO
+
+def registrar_evento(request):
+    if request.method == 'POST':
+        titulo = request.POST['titulo']
+        imagen = request.FILES.get('imagen', None)
+        descripcion = request.POST['descripcion']
+        video_presentacion = request.POST['video_presentacion']
+
+        Evento.objects.create(
+            titulo=titulo,
+            imagen=imagen,
+            descripcion=descripcion,
+            video_presentacion=video_presentacion
+        )
+        return redirect('adminevento')
+    return render(request, 'rsound/Admin/crear_evento.html')
+
+def eliminar_evento(request, pk):
+    evento = get_object_or_404(Evento, pk=pk)
+    if request.method == 'POST':
+        evento.delete()
+        return redirect('adminevento')
+    return render(request, 'rsound/Admin/eliminar_evento.html', {'evento': evento})
+
+def editar_evento(request, pk):
+    evento = get_object_or_404(Evento, pk=pk)
+    if request.method == 'POST':
+        evento.titulo = request.POST['titulo']
+        if 'imagen' in request.FILES:
+            evento.imagen = request.FILES['imagen']
+        evento.descripcion = request.POST['descripcion']
+        evento.video_presentacion = request.POST['video_presentacion']
+        evento.save()
+        return redirect('adminevento')
+    return render(request, 'rsound/Admin/editar_evento.html', {'evento': evento})
+
+def listado_evento(request):
+    eventos = Evento.objects.all()
+    contexto = {
+        "eventos": eventos
+    }
+    return render(request, 'rsound/Admin/listado_evento.html', contexto)
 

@@ -1,0 +1,78 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Admin - Listado de Eventos</title>
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/administracion.css' %}">
+{% endblock css %}
+
+{% block Contenido %}
+<div class="row fondogeneralosos">
+    <div class="col-md-3 col-sm-12 col-12">
+        <div class="navegador">
+            <nav class="barranav">
+                <ul>
+                    <a href="{% url 'administracion' %}">
+                        <li>Inicio Administrador</li>
+                    </a>
+                    <a href="{% url 'adminartistas' %}">
+                        <li>Administrar Artistas</li>
+                    </a>
+                    <a href="{% url 'adminusuario' %}">
+                        <li>Administrar Usuarios</li>
+                    </a>
+                    <a href="{% url 'adminevento' %}">
+                        <li>Administrar Eventos</li>
+                    </a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="col-md-9 col-sm-12 col-12 ">
+        <div class="col-md-12 administracion">
+            <div class="container-editar">
+                <div class="container-datos">
+                    <h4 id="titulo">Administrar Eventos</h4>
+                    <div class="row botonfiguras">
+                        <div class="col-md-12">
+                            <div class="boton">
+                                <a href="{% url 'crear_evento' %}">Crear Evento</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-dark table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Título del Evento</th>
+                                        <th>Imagen</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for evento in eventos %}
+                                    <tr>
+                                        <td>{{ evento.idEvento }}</td>
+                                        <td>{{ evento.titulo }}</td>
+                                        <td><img src="{{ evento.imagen.url }}" alt="{{ evento.titulo }}" style="width: 50px; height: auto;"></td>
+                                        <td>
+                                            <a href="{% url 'editar_evento' evento.idEvento %}" class="btn btn-primary btn-sm">Editar</a>
+                                            <a href="{% url 'eliminar_evento' evento.idEvento %}" class="btn btn-danger btn-sm">Borrar</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div><!--FIN CONTAINER EDITAR-->
+        </div><!--FIN MODIFICAR DATOS-->
+    </div>
+</div>
+{% endblock Contenido %}

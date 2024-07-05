@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block titulo %}
-<title>Admin - Artistas</title>
+<title>Admin - Eventos</title>
 {% endblock titulo %}
 
 {% block css %}
@@ -23,9 +23,9 @@
           </a>
           <a href="{% url 'adminusuario' %}">
             <li>Administrar Usuarios</li>
-            <a href="{% url 'adminevento' %}">
-              <li>Administrar Eventos</li>
-            </a>
+          </a>
+          <a href="{% url 'adminevento' %}">
+            <li>Administrar Eventos</li>
           </a>
         </ul>
       </nav>
@@ -36,18 +36,18 @@
     <div class="col-md-12">
       <div class="container-editar">
         <div class="container-datos administracion">
-          <h4 id="titulo">Administrar Artistas</h4>
+          <h4 id="titulo">Administrar Eventos</h4>
           <div class="row botonfiguras">
             <div class="col-md-12">
               <div class="boton">
-                <a href="{% url 'crear_artista' %}">Crear Artista</a>
+                <a href="{% url 'crear_evento' %}">Crear Evento</a>
               </div>
             </div>
           </div>
           <div class="row botonfiguras">
             <div class="col-md-12">
               <div class="boton">
-                <a href="{% url 'listado_artista' %}">Listado Artistas</a>
+                <a href="{% url 'listado_evento' %}">Listado Eventos</a>
               </div>
             </div>
           </div>
@@ -56,5 +56,4 @@
     </div>
   </div>
 </div>
-
 {% endblock Contenido %}
