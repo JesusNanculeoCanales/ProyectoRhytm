@@ -1,0 +1,26 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Eliminar Noticia - RhythmSound</title>
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/administracion.css' %}">
+{% endblock css %}
+
+{% block Contenido %}
+
+<div class="container mt-5">
+    <!-- CONFIRMAR ELIMINACIÓN -->
+    <h2 class="colorblanco centrado">Eliminar Noticia</h2>
+    <div class="fondoform">
+      <p class="colorblanco">¿Estás seguro de que deseas eliminar la noticia <strong>{{ noticia.titulo }}</strong>?</p>
+      <form action="{% url 'eliminar_noticia' noticia.idNoticia %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'adminnoticia' %}" class="btn btn-secondary">Cancelar</a>
+      </form>
+    </div>
+  </div>
+{% endblock Contenido %}

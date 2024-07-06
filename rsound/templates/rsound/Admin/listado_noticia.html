@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block titulo %}
-<title>Admin - Listado de Eventos</title>
+  <title>Admin - Listado de Noticias</title>
 {% endblock titulo %}
 
 {% block css %}
@@ -10,7 +10,9 @@
 {% endblock css %}
 
 {% block Contenido %}
+<!-- MODIFICAR PERFIL-->
 <div class="row fondogeneralosos">
+    <!-- NAVEGACION ADMIN-->
     <div class="col-md-3 col-sm-12 col-12">
         <div class="navegador">
             <nav class="barranav">
@@ -34,15 +36,19 @@
             </nav>
         </div>
     </div>
+    <!-- FIN NAVEGACION ADMIN-->
+
+    <!--ADMINISTRAR-->
     <div class="col-md-9 col-sm-12 col-12 ">
+        <!--MODIFICAR DATOS-->
         <div class="col-md-12 administracion">
             <div class="container-editar">
                 <div class="container-datos">
-                    <h4 id="titulo">Administrar Eventos</h4>
+                    <h4 id="titulo">Administrar Noticias</h4>
                     <div class="row botonfiguras">
                         <div class="col-md-12">
                             <div class="boton">
-                                <a href="{% url 'crear_evento' %}">Crear Evento</a>
+                                <a href="{% url 'crear_noticia' %}">Crear Noticia</a>
                             </div>
                         </div>
                     </div>
@@ -52,20 +58,20 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Título del Evento</th>
+                                        <th>Título</th>
                                         <th>Imagen</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for evento in eventos %}
+                                    {% for noticia in noticias %}
                                     <tr>
-                                        <td>{{ evento.idEvento }}</td>
-                                        <td>{{ evento.titulo }}</td>
-                                        <td><img src="{{ evento.imagen.url }}" alt="{{ evento.titulo }}" style="width: 50px; height: auto;"></td>
+                                        <td>{{ noticia.idNoticia }}</td>
+                                        <td>{{ noticia.titulo }}</td>
+                                        <td><img src="{{ noticia.imagen.url }}" alt="{{ noticia.titulo }}" style="width: 50px; height: auto;"></td>
                                         <td>
-                                            <a href="{% url 'editar_evento' evento.idEvento %}" class="btn btn-primary btn-sm">Editar</a>
-                                            <a href="{% url 'eliminar_evento' evento.idEvento %}" class="btn btn-danger btn-sm">Borrar</a>
+                                            <a href="{% url 'editar_noticia' noticia.idNoticia %}" class="btn btn-primary btn-sm">Editar</a>
+                                            <a href="{% url 'eliminar_noticia' noticia.idNoticia %}" class="btn btn-danger btn-sm">Borrar</a>
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -77,5 +83,7 @@
             </div><!--FIN CONTAINER EDITAR-->
         </div><!--FIN MODIFICAR DATOS-->
     </div>
+    <!-- FIN ADMINISTRAR-->
 </div>
+<!-- FIN MODIFICAR PERFIL-->
 {% endblock Contenido %}

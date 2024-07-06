@@ -1,0 +1,36 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+{% block titulo %}
+<title>Rhythm Sound - Eventos</title>
+{% endblock titulo %}
+{% block css %}
+<link href="{% static 'rsound/css/cssListadoEventos.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block Contenido %}
+<div class="container-fluid">
+    <h1>Eventos RhythmSound</h1>
+    <div class="container-eventos">
+        <div class="row">
+            {% for evento in eventos %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{ evento.imagen.url }}" class="card-img-top" alt="{{ evento.titulo }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ evento.titulo }}</h5>
+                        <p class="card-text">{{ evento.descripcion }}</p>
+                    
+                        <div class="boton">
+                            <form method="post" action="{% url 'evento' evento.idEvento %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Mostrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock Contenido %}

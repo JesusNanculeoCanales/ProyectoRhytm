@@ -1,90 +1,89 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
-from .forms import ArtistaForm, RegistroForm, LoginForm
-from .models import Artista, Usuario, Rol, Evento
-from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.models import User
+from .models import Artista, Usuario, Rol, Evento, Noticia
 
+# Vistas principales de la página
 def paginicio(request):
     es_admin = False
     if request.user.is_authenticated:
         es_admin = es_admin_funcion(request)
-
-    contexto = {
-        "es_admin": es_admin
-    }
-
+    eventos = Evento.objects.order_by('?').first()
+    noticia = Noticia.objects.order_by('?').first()
+    contexto = {"es_admin": es_admin, 'eventos':eventos,'noticia':noticia}
     return render(request, 'rsound/Index.html', contexto)
 
 def nosotros(request):
     es_admin = False
     if request.user.is_authenticated:
         es_admin = es_admin_funcion(request)
-
-    contexto = {
-        "es_admin": es_admin
-    }
+    contexto = {"es_admin": es_admin}
     return render(request, 'rsound/Nosotros.html', contexto)
 
 def listadoartistas(request):
     es_admin = False
     if request.user.is_authenticated:
         es_admin = es_admin_funcion(request)
-
     artistas = Artista.objects.all()
-    contexto = {
-        "es_admin": es_admin,
-        'artistas': artistas
-    }
+    contexto = {"es_admin": es_admin, 'artistas': artistas}
     return render(request, 'rsound/listadoArtistas.html', contexto)
-    
 
 def mercancia(request):
     es_admin = False
     if request.user.is_authenticated:
         es_admin = es_admin_funcion(request)
-
-    contexto = {
-        "es_admin": es_admin
-    }
+    contexto = {"es_admin": es_admin}
     return render(request, 'rsound/Mercancia.html', contexto)
 
 def novedades(request):
     es_admin = False
     if request.user.is_authenticated:
         es_admin = es_admin_funcion(request)
-
-    contexto = {
-        "es_admin": es_admin
-    }
+    contexto = {"es_admin": es_admin}
     return render(request, 'rsound/Novedades.html', contexto)
 
 def registro(request):
     es_admin = False
     if request.user.is_authenticated:
         es_admin = es_admin_funcion(request)
+    contexto = {"es_admin": es_admin}
+    return render(request, 'rsound/registro.html', contexto)
 
-    contexto = {
-        "es_admin": es_admin
-    }
-    return render(request, 'rsound/registro.html',contexto)
-
-def evento(request):
+def evento(request, id_evento):
     es_admin = False
     if request.user.is_authenticated:
         es_admin = es_admin_funcion(request)
+    evento = Evento.objects.get(idEvento = id_evento)
+    contexto = {"es_admin": es_admin,
+                "evento": evento}
+    return render(request, 'rsound/evento.html', contexto)
 
-    contexto = {
-        "es_admin": es_admin
-    }
-    return render(request, 'rsound/evento.html',contexto)
+def eventos(request):
+    es_admin = False
+    if request.user.is_authenticated:
+        es_admin = es_admin_funcion(request)
+    eventos = Evento.objects.all()
+    contexto = {"es_admin": es_admin, 'eventos':eventos}
+    return render(request, 'rsound/Eventos.html', contexto)
 
+def noticia(request, id_noticia):
+    es_admin = False
+    if request.user.is_authenticated:
+        es_admin = es_admin_funcion(request)
+    noticia = get_object_or_404(Noticia, idNoticia=id_noticia)
+    contexto = {"es_admin": es_admin,"noticia": noticia}
+    return render(request, 'rsound/noticia.html', contexto)
 
-def noticia(request):
-    return render(request, 'rsound/noticia.html')
+def noticias(request):
+    es_admin = False
+    if request.user.is_authenticated:
+        es_admin = es_admin_funcion(request)
+    noticia = Noticia.objects.all()
+    contexto = {"es_admin": es_admin, 'noticias': noticia}
+    return render(request, 'rsound/Noticias.html', contexto)
 
 def cerati(request):
     return render(request, 'rsound/artistas/Gustavocerati.html')
@@ -104,6 +103,7 @@ def newjeans(request):
 def blur(request):
     return render(request, 'rsound/artistas/blur.html')
 
+# Vistas de administración
 def administracion(request):
     return render(request, 'rsound/Admin/administracion.html')
 
@@ -116,69 +116,85 @@ def adminusuario(request):
 def adminevento(request):
     return render(request, 'rsound/Admin/adminEvento.html')
 
+def adminnoticia(request):
+    return render(request, 'rsound/Admin/adminNoticia.html')
+
 def crear_artista(request):
     return render(request, 'rsound/Admin/crear_artista.html')
 
-
 def listado_artista(request):
-    artista=Artista.objects.all()
-    contexto={
-        "arte":artista
-    }
-    return render(request, 'rsound/Admin/listado_artista.html',contexto)
-
+    artista = Artista.objects.all()
+    contexto = {"arte": artista}
+    return render(request, 'rsound/Admin/listado_artista.html', contexto)
 
 def listado_usuario(request):
-    roles=Rol.objects.all()
-    usuario=Usuario.objects.all()
-    contexto={
-        "roles":roles,
-        "persona":usuario
-    }
-    return render(request, 'rsound/Admin/listado_usuario.html',contexto)
-
+    roles = Rol.objects.all()
+    usuario = Usuario.objects.all()
+    contexto = {"roles": roles, "persona": usuario}
+    return render(request, 'rsound/Admin/listado_usuario.html', contexto)
 
 def crear_usuario(request):
-    roles=Rol.objects.all()
-    contexto={
-        "roles":roles
-    }
-    return render(request, 'rsound/Admin/crear_usuario.html',contexto)
-
+    roles = Rol.objects.all()
+    contexto = {"roles": roles}
+    return render(request, 'rsound/Admin/crear_usuario.html', contexto)
 
 def crear_evento(request):
-    roles=Rol.objects.all()
-    contexto={
-        "roles":roles
-    }
-    return render(request, 'rsound/Admin/crear_usuario.html',contexto)
+    roles = Rol.objects.all()
+    contexto = {"roles": roles}
+    return render(request, 'rsound/Admin/crear_usuario.html', contexto)
 
 def pagEditar_usuario(request, id_usuario):
-
-    usuarioAEditar = Usuario.objects.get(idUsuario = id_usuario) 
+    usuarioAEditar = Usuario.objects.get(idUsuario=id_usuario)
     roles = Rol.objects.all()
-
-    contexto = {
-        "id_usuario": id_usuario,
-        "usuario": usuarioAEditar,
-        "roles": roles
-    }
+    contexto = {"id_usuario": id_usuario, "usuario": usuarioAEditar, "roles": roles}
     return render(request, 'rsound/Admin/editar_usuario.html', contexto)
 
-## funciones
-
+# Funciones de autenticación
 def logout_view(request):
     logout(request)
     return redirect('inicio')
 
+def iniciar_sesion(request):
+    usuario1 = request.POST.get('usuario', '')
+    contra1 = request.POST.get('contra', '')
+    if not usuario1:
+        return redirect('inicio')
+
+    try:
+        user1 = User.objects.get(username=usuario1)
+    except User.DoesNotExist:
+        messages.error(request, 'El usuario o la contraseña son incorrectas')
+        return redirect('inicio')
+
+    pass_valida = check_password(contra1, user1.password)
+    if not pass_valida:
+        messages.error(request, 'El usuario o la contraseña son incorrectas')
+        return redirect('inicio')
+
+    usuario2 = Usuario.objects.get(correo=usuario1)
+    user = authenticate(username=usuario1, password=contra1)
+
+    if user is not None:
+        login(request, user)
+        if usuario2.rol.nombreRol == "Admin":
+            usuario2.is_staff = True
+            usuario2.save()
+            return redirect('administracion')
+        else:
+            usuario2.is_staff = False
+            usuario2.save()
+            return redirect('inicio')
+    else:
+        return redirect('inicio')
+
 def registrar_usuario(request):
-    nombreUsu = request.POST['nickname']         
-    nombres= request.POST['name'] 
-    apellido = request.POST['apellido'] 
-    correoU   = request.POST['email'] 
-    claveU    = request.POST['password'] 
+    nombreUsu = request.POST['nickname']
+    nombres = request.POST['name']
+    apellido = request.POST['apellido']
+    correoU = request.POST['email']
+    claveU = request.POST['password']
     telefonoU = request.POST['telefono']
-    rol=Rol.objects.get(nombreRol="Usuario")
+    rol = Rol.objects.get(nombreRol="Usuario")
 
     Usuario.objects.create(
         nombreUsuario=nombreUsu,
@@ -192,29 +208,27 @@ def registrar_usuario(request):
     )
 
     user = User.objects.create_user(
-        username = correoU,
-        email = correoU,
-        password = claveU
+        username=correoU,
+        email=correoU,
+        password=claveU
     )
     user.first_name = nombreUsu
     user.last_name = apellido
-    user.is_staff=False
+    user.is_staff = False
     user.save()
 
     return redirect('inicio')
 
-
 def registrar_usuario_admin(request):
-
-    nombreUsu = request.POST['nickname']         
-    nombres= request.POST['name'] 
-    apellido = request.POST['apellido'] 
-    correoU   = request.POST['email'] 
-    claveU    = request.POST['password'] 
+    nombreUsu = request.POST['nickname']
+    nombres = request.POST['name']
+    apellido = request.POST['apellido']
+    correoU = request.POST['email']
+    claveU = request.POST['password']
     telefonoU = request.POST['telefono']
     rol = request.POST['rol']
 
-    rolModels = Rol.objects.get(idRol = rol)
+    rolModels = Rol.objects.get(idRol=rol)
 
     Usuario.objects.create(
         nombreUsuario=nombreUsu,
@@ -228,35 +242,37 @@ def registrar_usuario_admin(request):
     )
 
     user = User.objects.create_user(
-        username = correoU,
-        email = correoU,
-        password = claveU
+        username=correoU,
+        email=correoU,
+        password=claveU
     )
     user.first_name = nombreUsu
     user.last_name = apellido
-    user.is_staff=False
+    user.is_staff = False
+    if rol == 2:
+        user.is_staff = True
     user.save()
 
     return redirect('adminusuario')
 
+# Funciones para artistas
 def registrar_artista(request):
-    nombreArt = request.POST['nameartista']         
-    image= request.FILES.get('imagen',None)
-    biografia = request.POST['biografia'] 
-    discografia= request.POST['discos'] 
-    recopilatorio= request.POST.get('recopilatorio',None) 
+    nombreArt = request.POST['nameartista']
+    image = request.FILES.get('imagen', None)
+    biografia = request.POST['biografia']
+    discografia = request.POST['discos']
+    recopilatorio = request.POST.get('recopilatorio', None)
     videos = request.POST['video']
 
-    artista=Artista.objects.create(
-        nombreArtista= nombreArt,
-        imagen = image,
+    Artista.objects.create(
+        nombreArtista=nombreArt,
+        imagen=image,
         biografiaArtista=biografia,
         discografiaArtista=discografia,
         recopilatorioArtista=recopilatorio,
-        video = videos
+        video=videos
     )
     return redirect('administracion')
-
 
 def eliminar_artista(request, pk):
     artista = get_object_or_404(Artista, pk=pk)
@@ -279,129 +295,57 @@ def editar_artista(request, pk):
         return redirect('adminartistas')
     return render(request, 'rsound/Admin/editar_artista.html', {'artista': artista})
 
+# Funciones para usuarios
 def editar_usuario_funcion(request, id_usuario):
     try:
-        nombre=request.POST['name']
-        apellido=request.POST['apellido']
-        nombreusuario=request.POST['nickname']
-        emails=request.POST['email']
-        telefonos=request.POST['telefono']
-        contrasena=request.POST.get('password',None)
+        nombre = request.POST['name']
+        apellido = request.POST['apellido']
+        nombreusuario = request.POST['nickname']
+        emails = request.POST['email']
+        telefonos = request.POST['telefono']
+        contrasena = request.POST.get('password', None)
         rol = request.POST['rol']
 
-        #EDITAR TABLA USUARIOS
-
-        usuarios = Usuario.objects.get(idUsuario = id_usuario)
+        # EDITAR TABLA USUARIOS
+        usuarios = Usuario.objects.get(idUsuario=id_usuario)
         usuarios.nombreUsuario = nombreusuario
-        usuarios.apellidos =  apellido
+        usuarios.apellidos = apellido
         usuarios.nombre = nombre
         usuarios.correo = emails
         usuarios.numero_telefonico = telefonos
         if contrasena:
             usuarios.contraseña = contrasena
-        usuarios.rol = Rol.objects.get(idRol = rol)
+        usuarios.rol = Rol.objects.get(idRol=rol)
         usuarios.save()
 
-        #EDITAR TABLA USERS
-        userDjango = User.objects.get(username = emails)
-        userDjango.email= emails
+        # EDITAR TABLA USERS
+        userDjango = User.objects.get(username=emails)
+        userDjango.email = emails
         userDjango.username = emails
-        userDjango.first_name= nombreusuario
-        userDjango.last_name= apellido
+        userDjango.first_name = nombreusuario
+        userDjango.last_name = apellido
 
-        #VALIDAR STAFF
+        # VALIDAR STAFF
         userDjango.is_staff = False
         if rol == 2:
             userDjango.is_staff = True
 
         userDjango.save()
         messages.success(request, 'Editado Correctamente.')
-    
+
     except Exception as e:
         messages.error(request, 'Ocurrio un Error.')
 
     return redirect('listado_usuario')
 
-
-def eliminar_usuario(request, pk):
-    usuario = get_object_or_404(User, pk=pk)
-    if request.method == 'POST':
-        usuario.delete()
-        return redirect('adminusuario')
-    return render(request, 'rsound/admin/eliminar_usuario.html', {'usuario': usuario})
-
-
 def eliminar_usuario(request, id_usuario):
-
-    #OBTENER USUARIO MODELS
-    usuario = Usuario.objects.get(idUsuario = id_usuario)
-
-    #OBTENER USUARIO DJANGO
-    userDjango = User.objects.get(username = usuario.correo)
-
-    #ELIMINAR USER DJANGO
+    usuario = Usuario.objects.get(idUsuario=id_usuario)
+    userDjango = User.objects.get(username=usuario.correo)
     userDjango.delete()
-
-    #ELIMINAR USUARIO MODELS
     usuario.delete()
-
     return redirect('listado_usuario')
 
-
-def iniciar_sesion(request):
-        
-    usuario1 = request.POST.get('usuario','')
-    contra1 = request.POST.get('contra','')
-    if not usuario1:
-        return redirect('inicio')
-    
-    try: 
-        user1 = User.objects.get(username = usuario1)
-    except User.DoesNotExist:
-        messages.error(request, 'El usuario o la contraseña son incorrectas')
-        return redirect('inicio')
-
-    pass_valida = check_password(contra1, user1.password)
-    if not pass_valida:
-        messages.error(request, 'El usuario o la contraseña son incorrectas')
-        return redirect('inicio')
-
-    usuario2 = Usuario.objects.get(correo = usuario1)
-    user = authenticate(username = usuario1, password=contra1)
-
-    if user is not None:
-        login(request, user)
-        if(usuario2.rol.nombreRol == "Admin"):
-            usuario2.is_staff=True
-            usuario2.save
-            return redirect('administracion')
-        
-        else: 
-            usuario2.is_staff=False
-            usuario2.save
-
-            return redirect('inicio')
-    else:
-        return redirect('inicio')
-
-#FUNCION EXTRA
-def es_admin_funcion(request):
-    user = request.user
-    username = user.username
-
-    usuarioModel = Usuario.objects.get(correo = username)
-    rolModel = usuarioModel.rol
-
-    if rolModel.nombreRol == 'Admin':
-        es_admin = True
-    else:
-        es_admin = False
-
-    return es_admin
-
-
-## FUNCIONES PARA FUNCIONAMIENTO MODEL EVENTO
-
+# Funciones para eventos
 def registrar_evento(request):
     if request.method == 'POST':
         titulo = request.POST['titulo']
@@ -439,8 +383,59 @@ def editar_evento(request, pk):
 
 def listado_evento(request):
     eventos = Evento.objects.all()
-    contexto = {
-        "eventos": eventos
-    }
+    contexto = {"eventos": eventos}
     return render(request, 'rsound/Admin/listado_evento.html', contexto)
+
+# Funciones para noticias
+def registrar_noticia(request):
+    if request.method == 'POST':
+        titulo = request.POST['titulo']
+        fecha = request.POST['fecha']
+        imagen = request.FILES.get('imagen', None)
+        descripcion = request.POST['descripcion']
+        video_presentacion = request.POST['video_presentacion']
+
+        Noticia.objects.create(
+            titulo=titulo,
+            fecha=fecha,
+            imagen=imagen,
+            descripcion=descripcion,
+            video_presentacion=video_presentacion
+        )
+        return redirect('adminnoticia')
+    return render(request, 'rsound/Admin/crear_noticia.html')
+
+def eliminar_noticia(request, pk):
+    noticia = get_object_or_404(Noticia, pk=pk)
+    if request.method == 'POST':
+        noticia.delete()
+        return redirect('adminnoticia')
+    return render(request, 'rsound/Admin/eliminar_noticia.html', {'noticia': noticia})
+
+def editar_noticia(request, pk):
+    noticia = get_object_or_404(Noticia, pk=pk)
+    if request.method == 'POST':
+        noticia.titulo = request.POST['titulo']
+        noticia.fecha = request.POST['fecha']
+        if 'imagen' in request.FILES:
+            noticia.imagen = request.FILES['imagen']
+        noticia.descripcion = request.POST['descripcion']
+        noticia.video_presentacion = request.POST['video_presentacion']
+        noticia.save()
+        return redirect('adminnoticia')
+    return render(request, 'rsound/Admin/editar_noticia.html', {'noticia': noticia})
+
+def listado_noticia(request):
+    noticias = Noticia.objects.all()
+    contexto = {"noticias": noticias}
+    return render(request, 'rsound/Admin/listado_noticia.html', contexto)
+
+# Función extra para verificar si el usuario es administrador
+def es_admin_funcion(request):
+    user = request.user
+    username = user.username
+    usuarioModel = Usuario.objects.get(correo=username)
+    rolModel = usuarioModel.rol
+    return rolModel.nombreRol == 'Admin'
+
 

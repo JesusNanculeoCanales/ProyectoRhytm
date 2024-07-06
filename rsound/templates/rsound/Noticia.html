@@ -1,48 +1,37 @@
 {% extends 'rsound/Plantilla.html' %}
 {% load static %}
-
 {% block titulo %}
-<title>La canción que no le gusta a Thom Yorke!</title>
+<title>{{ noticia.titulo }}</title>
 {% endblock titulo %}
+{% block css %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock css %}
 
 {% block Contenido %}
 <div class="titulo">
-    <h1>La canción de Radiohead que “no es mala, es muy mala” según Thom Yorke</h1>
+  <h1>{{ noticia.titulo }}</h1>
 </div>
 
 <!-- CAROUSEL -->
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="3000">
-          <img src="{% static 'rsound/imagenes/ThomYorke.jpg' %}" class="d-block w-100" alt="Thom Yorke">
-      </div>
-      <div class="carousel-item" data-bs-interval="3000">
-          <img src="{% static 'rsound/imagenes/Thomyorke2.jpg' %}" class="d-block w-100" alt="Thom Yorke Performing">
-      </div>
-      <div class="carousel-item" data-bs-interval="3000">
-          <img src="{% static 'rsound/imagenes/thebends.jpg' %}" class="d-block w-100" alt="The Bends Album Cover">
-      </div>
+    <div class="carousel-item active" data-bs-interval="3000">
+      <img src="{{ noticia.imagen.url }}" class="d-block w-100" alt="{{ noticia.titulo }}">
+    </div>
   </div>
 </div>
 
 <!-- TEXTO -->
 <div class="text-content">
-    <p>En una entrevista con Billboard (vía Far Out) de 1996, Yorke hizo referencia a la composición de esta canción
-        y confesó que la escribió pensando en “una chica con la que estaba saliendo”. Igualmente, también se sumaron
-        nuevas temáticas: “Luego se mezcló con ideas sobre el éxito y el fracaso”, expresó el cantante, quien
-        confesó que “High and Dry” no es para nada de su agrado. “No es mala, es muy mala”, fueron las palabras del
-        compositor nacido en Reino Unido.
-    <br>
-    <br>
-        Lo cierto es que Yorke no se siente para nada orgulloso de esta canción, aunque ha sido una de las que más
-        éxito mundial le ha otorgado. Hablando de los más grandes hits de Radiohead, el músico también ha admitido
-        que está lejos de ser fan de “Creep”, canción que casi no incluyen en sus shows: “Tengo un problema con ser
-        un hombre en los 90… Cualquier hombre con sensibilidad o consciencia con respecto al sexo opuesto tendría un
-        problema”, declaró sobre la razón por la que detesta esta canción.</p>
+  <h3>{{ noticia.fecha }}</h3>
+  <p>{{ noticia.descripcion }}</p>
 </div>
 
 <!-- VIDEO -->
 <div class="video-wrapper">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/Pvtky6-7vlk?si=NE_stAML2dCACUBB" title="High and dry" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="100%" height="500" src="{{ noticia.video_presentacion }}"
+    title="video de la noticia" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
 </div>
 {% endblock Contenido %}

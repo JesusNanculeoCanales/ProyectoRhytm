@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block titulo %}
-<title>Interpol Concierto en Chile!</title>
+<title>Eventos agregados</title>
 {% endblock titulo %}
 
 {% block css %}
@@ -11,60 +11,30 @@
 
 {% block Contenido %}
 <div class="titulo">
-  <h1>Interpol vuelve a Chile a celebrar dos de sus álbumes más importantes: 31 de mayo</h1>
+  <h1>{{evento.titulo}}</h1>
 </div>
 
 <!-- CAROUSEL -->
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="3000">
-      <img src="{% static 'rsound/imagenes/interpol1.jpg' %}" class="d-block w-100" alt="First Slide">
-    </div>
-    <div class="carousel-item" data-bs-interval="3000">
-      <img src="{% static 'rsound/imagenes/interpol2.jpg' %}" class="d-block w-100" alt="Second Slide">
-    </div>
-    <div class="carousel-item" data-bs-interval="3000">
-      <img src="{% static 'rsound/imagenes/interpol3.jpg' %}" class="d-block w-100" alt="Third Slide">
+      <img src="{{evento.imagen.url}}" class="d-block w-100" alt="First Slide">
     </div>
   </div>
 </div>
 
 <!-- TEXTO -->
 <div class="text-content">
-  <p>Interpol llegará de nuevo a estas tierras el 31 de mayo del 2024, día en el que nuevamente se subirán al
-    escenario del Teatro Caupolicán.
-
-    Esta visita servirá para celebrar dos de los discos más importantes de su carrera: Turn On The Bright Lights y
-    Antics.
-
-    Turn On The Bright Lights fue lanzado el año 2002, cimentando la carrera de los norteamericanos con clásicos como
-    «Obstacle 1», «PDA» o «Stella Was a Diver And She Was Always Down».
-
-    Por su parte, Antics -del año 2004- fue el que los posicionó internacionalmente, con ya clásicos como «C’Mere»,
-    «Narc» y «Evil».
-
-    Todos estos hits estarán acompañados por lo mejor de The Other Side of Make-Believe, su último disco de estudio.
-
-    La última visita de los neoyorkinos fue en el marco del festival Primavera Sound realizado en el Parque
-    Bicentenario de Cerrillos.
-
-    La venta de entradas comenzará el 2 de noviembre al mediodía a través de Puntoticket.</p>
-</div>
-
-<!-- BOTOM DIRECCION PUNTO TICKET -->
-<div class="d-flex justify-content-center align-items-center" style="height:10vh;">
-  <a href="https://www.puntoticket.com/interpol" target="_blank">
-    <button type="button" class="btn btn-primary"
-      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-      Punto Ticket
-    </button>
-  </a>
+  <p>{{evento.descripcion}}</p>
 </div>
 
 <!-- VIDEO -->
 <div class="video-wrapper">
-  <iframe width="100%" height="500" src="https://www.youtube-nocookie.com/embed/TD_I4iGe_UE?si=GhqHJrh40-DHQ-Oe"
-    title="EVIL-INTERPOL" frameborder="0"
+  <video src="{{evento.video_presentacion}}">
+
+  </video>
+  <iframe width="100%" height="500" src="{{evento.video_presentacion}}"
+    title="video del evento" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen></iframe>
 </div>

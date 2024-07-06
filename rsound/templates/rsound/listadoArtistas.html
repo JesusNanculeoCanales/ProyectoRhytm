@@ -1,14 +1,31 @@
 {% extends 'rsound/Plantilla.html' %}
 {% load static %}
 {% block titulo %}
-<title>Rhythm Sound - Nosotros</title>
+<title>Rhythm Sound - Artistas</title>
 {% endblock titulo %}
 {% block css %}
-<link href="{% static 'rsound/css/cssListadoArtistas.css' %}" rel="stylesheet">
+<link href="{% static 'rsound/css/cssListadoEventos.css' %}" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {% endblock css %}
 
 {% block Contenido %}
 <div class="container-fluid">
   <h1>Artistas RhythmSound</h1>
+  <div class="row">
+    {% for artista in artistas %}
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <img src="{{ artista.imagen.url }}" class="card-img-top" alt="{{ artista.nombreArtista }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ artista.nombreArtista }}</h5>
+            <p class="card-text">{{ artista.biografiaArtista }}</p>
+            <p class="card-text"><strong>Discografía:</strong> {{ artista.discografiaArtista }}</p>
+            <p class="card-text"><strong>Recopilatorio:</strong> {{ artista.recopilatorioArtista }}</p>
+            <p class="card-text"><strong>Video:</strong> <a href="{{ artista.video }}" target="_blank">{{ artista.video }}</a></p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock Contenido %}

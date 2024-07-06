@@ -1,0 +1,51 @@
+body {
+    background-color: #121212;
+    color: #fff;
+}
+
+.container-fluid h1 {
+    text-align: center;
+    color: #ffd700;
+    margin-top: 20px;
+}
+
+.container-eventos .card {
+    background-color: #1f1f1f;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.container-eventos .card-img-top {
+    border-radius: 8px 8px 0 0;
+    height: 200px;
+    object-fit: cover;
+}
+
+.container-eventos .card-body {
+    padding: 15px;
+}
+
+.container-eventos .card-title {
+    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.container-eventos .card-text {
+    color: #bbb;
+    margin-bottom: 10px;
+}
+
+.container-eventos .card-text a {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+.container-eventos .card-text a:hover {
+    text-decoration: underline;
+}
+
+.escondido{
+    display:  none;
+}

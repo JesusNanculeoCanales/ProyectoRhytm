@@ -1,0 +1,46 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Editar Noticia - RhythmSound</title>
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/administracion.css' %}">
+{% endblock css %}
+
+{% block Contenido %}
+
+<div class="container mt-5">
+    <h2 class="colorblanco centrado">Editar Noticia</h2>
+    <div class="fondoform">
+      <form id="registroForm" action="{% url 'editar_noticia' noticia.idNoticia %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="titulo" class="form-label colorblanco">Título de la Noticia:</label>
+          <input type="text" class="form-control" id="titulo" name="titulo" value="{{ noticia.titulo }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="fecha" class="form-label colorblanco">Fecha de Publicación:</label>
+          <input type="date" class="form-control" id="fecha" name="fecha" value="{{ noticia.fecha }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="imagen" class="form-label colorblanco">Imagen:</label>
+          <input type="file" class="form-control" id="imagen" name="imagen">
+          {% if noticia.imagen %}
+            <img src="{{ noticia.imagen.url }}" alt="{{ noticia.titulo }}" style="width: 150px; height: auto;">
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <label for="descripcion" class="form-label colorblanco">Descripción:</label>
+          <textarea class="form-control" id="descripcion" name="descripcion" required>{{ noticia.descripcion }}</textarea>
+        </div>
+        <div class="mb-3">
+          <label for="video_presentacion" class="form-label colorblanco">Video de Presentación:</label>
+          <input type="url" class="form-control" id="video_presentacion" name="video_presentacion" value="{{ noticia.video_presentacion }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="btnregistro">Guardar Cambios</button>
+      </form>
+    </div>
+  </div>
+{% endblock Contenido %}

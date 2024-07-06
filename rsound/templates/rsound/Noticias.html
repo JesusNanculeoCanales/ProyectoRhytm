@@ -1,0 +1,37 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+{% block titulo %}
+<title>Rhythm Sound - Noticias</title>
+{% endblock titulo %}
+{% block css %}
+<link href="{% static 'rsound/css/cssListadoEventos.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block Contenido %}
+<div class="container-fluid">
+    <h1>Noticias RhythmSound</h1>
+    <div class="container-noticias">
+        <div class="row">
+            {% for noticia in noticias %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{ noticia.imagen.url }}" class="card-img-top" alt="{{ noticia.titulo }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ noticia.titulo }}</h5>
+                        <p class="card-text">{{ noticia.fecha }}</p>
+                        <p class="card-text">{{ noticia.descripcion }}</p>
+                        <div class="boton">
+                          <form method="post" action="{% url 'noticia' noticia.idNoticia %}">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-primary">Mostrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock Contenido %}
+
+

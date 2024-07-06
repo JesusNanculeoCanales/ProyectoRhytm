@@ -52,6 +52,18 @@ class Favorito(models.Model):
 
     def __str__(self):
         return f"Favorito de {self.usuario.nombreUsuario} - {self.artista.nombreArtista}"
+    
+
+class Noticia(models.Model):
+    idNoticia = models.AutoField(primary_key=True, verbose_name='Id de Noticia')
+    titulo = models.CharField(max_length=100)
+    fecha = models.DateField(verbose_name='Fecha de Publicación')
+    imagen = models.ImageField(upload_to='noticias/')
+    descripcion = models.TextField()
+    video_presentacion = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.titulo
 
     
 
