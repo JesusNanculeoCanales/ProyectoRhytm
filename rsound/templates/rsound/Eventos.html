@@ -17,8 +17,7 @@
                 <div class="card mb-4 shadow-sm">
                     <img src="{{ evento.imagen.url }}" class="card-img-top" alt="{{ evento.titulo }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ evento.titulo }}</h5>
-                        <p class="card-text">{{ evento.descripcion }}</p>
+                        <h1 class="card-title">{{ evento.titulo }}</h1>
                     
                         <div class="boton">
                             <form method="post" action="{% url 'evento' evento.idEvento %}">

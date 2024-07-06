@@ -23,14 +23,6 @@ def nosotros(request):
     contexto = {"es_admin": es_admin}
     return render(request, 'rsound/Nosotros.html', contexto)
 
-def listadoartistas(request):
-    es_admin = False
-    if request.user.is_authenticated:
-        es_admin = es_admin_funcion(request)
-    artistas = Artista.objects.all()
-    contexto = {"es_admin": es_admin, 'artistas': artistas}
-    return render(request, 'rsound/listadoArtistas.html', contexto)
-
 def mercancia(request):
     es_admin = False
     if request.user.is_authenticated:
@@ -84,6 +76,23 @@ def noticias(request):
     noticia = Noticia.objects.all()
     contexto = {"es_admin": es_admin, 'noticias': noticia}
     return render(request, 'rsound/Noticias.html', contexto)
+
+def artista(request, id_artista):
+    es_admin = False
+    if request.user.is_authenticated:
+        es_admin = es_admin_funcion(request)
+    artista = Artista.objects.get(idArtista=id_artista)
+    contexto = {"es_admin": es_admin, "artista": artista}
+    print (id_artista)
+    return render(request, 'rsound/artista.html', contexto)
+   
+def listadoartistas(request):
+    es_admin = False
+    if request.user.is_authenticated:
+        es_admin = es_admin_funcion(request)
+    artistas = Artista.objects.all()
+    contexto = {"es_admin": es_admin, 'artistas': artistas}
+    return render(request, 'rsound/listadoArtistas.html', contexto)
 
 def cerati(request):
     return render(request, 'rsound/artistas/Gustavocerati.html')

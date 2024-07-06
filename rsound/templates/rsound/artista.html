@@ -1,0 +1,41 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+{% block titulo %}
+<title>{{ artista.nombreArtista }}</title>
+{% endblock titulo %}
+{% block css %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock css %}
+
+{% block Contenido %}
+<div class="titulo">
+  <h1>{{ artista.nombreArtista }}</h1>
+</div>
+
+<!-- CAROUSEL -->
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="3000">
+      <img src="{{ artista.imagen.url }}" class="d-block w-100" alt="{{ artista.nombreArtista }}">
+    </div>
+  </div>
+</div>
+
+<!-- TEXTO -->
+<div class="text-content">
+  <h3>Discografía</h3>
+  <p>{{ artista.discografiaArtista }}</p>
+  <h3>Recopilatorio</h3>
+  <p>{{ artista.recopilatorioArtista }}</p>
+  <h3>Biografía</h3>
+  <p>{{ artista.biografiaArtista }}</p>
+</div>
+
+<!-- VIDEO -->
+<div class="video-wrapper">
+  <iframe width="100%" height="500" src="{{ artista.video }}"
+    title="video del artista" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+{% endblock Contenido %}

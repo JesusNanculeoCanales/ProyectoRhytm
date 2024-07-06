@@ -5,7 +5,7 @@ body {
 
 .container-fluid h1 {
     text-align: center;
-    color: #ffd700;
+    color: #2d29f3;
     margin-top: 20px;
 }
 
@@ -38,7 +38,7 @@ body {
 }
 
 .container-eventos .card-text a {
-    color: #ffd700;
+    color: #2d29f3;
     text-decoration: none;
 }
 

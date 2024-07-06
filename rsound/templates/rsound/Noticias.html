@@ -19,11 +19,10 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ noticia.titulo }}</h5>
                         <p class="card-text">{{ noticia.fecha }}</p>
-                        <p class="card-text">{{ noticia.descripcion }}</p>
                         <div class="boton">
-                          <form method="post" action="{% url 'noticia' noticia.idNoticia %}">
-                              {% csrf_token %}
-                              <button type="submit" class="btn btn-primary">Mostrar</button>
+                          <a href="{% url 'noticia' noticia.idNoticia %}">
+                            <button type="submit" class="btn btn-primary">Mostrar</button>
+                          </a>
                         </div>
                     </div>
                 </div>
@@ -33,5 +32,6 @@
     </div>
 </div>
 {% endblock Contenido %}
+
 
 
