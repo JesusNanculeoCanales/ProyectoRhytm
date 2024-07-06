@@ -46,13 +46,14 @@
             <a class="nav-link active color_letra_nav color_letra_nav_active" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link color_letra_nav" href="{% url 'novedades' %}">Novedades</a>
+            <a class="nav-link color_letra_nav" href="{% url 'listadoartistas' %}">Artistas</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle color_letra_nav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item color_letra_nav" href="{% url 'mercancia' %}">Mercancía</a></li>
-              <li><a class="dropdown-item color_letra_nav" href="{% url 'listadoartistas' %}">Artistas</a></li>
+              <li><a class="dropdown-item color_letra_nav" href="{% url 'mercancia' %}">Eventos</a></li>
+              <li><a class="dropdown-item color_letra_nav" href="{% url 'novedades' %}">Noticias</a></li>
+              <li><a class="dropdown-item color_letra_nav" href="{% url 'mercancia' %}">Mercancia</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
