@@ -65,9 +65,9 @@
           </li>
           {% endif %}
         </ul>
-        <form class="d-flex mx-auto" role="search">
-          <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
-          <button class="btn btn-outline-success" type="button" onclick="buscadorBuscar(this)">Buscar</button>
+        <form class="d-flex mx-auto" role="search" action="{% url 'buscar_artistas' %}" method="GET">
+          <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" name="q">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
         <div class="d-flex ms-auto">
           <!-- Carrito de Compras -->

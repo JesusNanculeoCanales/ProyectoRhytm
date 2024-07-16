@@ -536,3 +536,15 @@ def pagar(request):
         return redirect('inicio')
     contexto = {"productos_carrito": productos_carrito, "total": total}
     return render(request, 'rsound/Pagar.html', contexto)
+
+
+# BUSCAR
+
+def buscar_artistas(request):
+    query = request.GET.get('q', '')
+    resultados = Artista.objects.filter(nombreArtista__icontains=query)
+    contexto = {
+        'resultados': resultados,
+        'query': query
+    }
+    return render(request, 'rsound/buscar_resultados.html', contexto)
