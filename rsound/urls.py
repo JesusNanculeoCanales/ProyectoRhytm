@@ -1,9 +1,10 @@
 from django.urls import path
 from .views import (
-    agregar_al_carrito,carrito,artista,noticias,eventos,adminnoticia,eliminar_noticia,editar_noticia,registrar_noticia,listado_noticia,adminnoticia,listado_evento,eliminar_evento,editar_evento,registrar_evento,iniciar_sesion,editar_usuario_funcion,registrar_usuario_admin,pagEditar_usuario, paginicio, nosotros, listadoartistas, crear_artista, mercancia, novedades, registro, 
+    artista,noticias,eventos,adminnoticia,eliminar_noticia,editar_noticia,registrar_noticia,listado_noticia,adminnoticia,listado_evento,eliminar_evento,editar_evento,registrar_evento,iniciar_sesion,editar_usuario_funcion,registrar_usuario_admin,pagEditar_usuario, paginicio, nosotros, listadoartistas, crear_artista, mercancia, novedades, registro, 
     evento, noticia, aespa, smiths, jungkook, blur, newjeans, cerati, logout_view, 
     registrar_usuario, administracion, adminartistas, adminusuario, crear_usuario, listado_usuario, 
-    registrar_artista, crear_artista, listado_artista, editar_artista, eliminar_artista, eliminar_usuario, editar_usuario_funcion,adminevento,adminproductos,crear_producto,editar_producto,eliminar_producto
+    registrar_artista, crear_artista, listado_artista, editar_artista, eliminar_artista, eliminar_usuario, editar_usuario_funcion,adminevento,adminproductos,crear_producto,editar_producto,eliminar_producto,
+    agregar_al_carrito,carrito,eliminar_del_carrito,pagar
 )
 
 urlpatterns = [
@@ -73,8 +74,10 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
 
     #
-    path('agregar_al_carrito/<int:producto_id>/', agregar_al_carrito, name='agregar_al_carrito'),
-    path('carrito/', carrito, name='carrito'),
+    path('agregar_al_carrito/<int:producto_id>/',agregar_al_carrito, name='agregar_al_carrito'),
+    path('carrito/',carrito, name='carrito'),
+    path('eliminar_del_carrito/<int:item_id>/',eliminar_del_carrito, name='eliminar_del_carrito'),
+    path('pagar/',pagar, name='pagar'),
 
 ]
 

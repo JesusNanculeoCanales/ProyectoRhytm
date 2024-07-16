@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from .models import Artista, Usuario, Rol, Evento, Noticia, Producto, Carrito, CarritoProducto
 from .forms import ProductoForm
@@ -485,33 +486,45 @@ def es_admin_funcion(request):
 
 # carro de compras y productos
 
-def mercancia(request):
-    es_admin = False
-    if request.user.is_authenticated:
-        es_admin = es_admin_funcion(request)
-    productos = Producto.objects.all()
-    contexto = {"es_admin": es_admin, "productos": productos}
-    return render(request, 'rsound/Mercancia.html', contexto)
+User = get_user_model()
 
 def agregar_al_carrito(request, producto_id):
-    if request.user.is_authenticated:
-        carrito, created = Carrito.objects.get_or_create(usuario=request.user)
-        producto = get_object_or_404(Producto, idProducto=producto_id)
-        carrito_producto, created = CarritoProducto.objects.get_or_create(carrito=carrito, producto=producto)
-        if not created:
-            carrito_producto.cantidad += 1
-            carrito_producto.save()
-        return redirect('carrito')
-    else:
-        return redirect('iniciar_sesion')
+    usuario = get_object_or_404(Usuario, correo=request.user.email)
+    carrito, created = Carrito.objects.get_or_create(usuario=usuario)
+    producto = get_object_or_404(Producto, idProducto=producto_id)
+    carrito_producto, created = CarritoProducto.objects.get_or_create(carrito=carrito, producto=producto)
+    if not created:
+        carrito_producto.cantidad += 1
+    carrito_producto.save()
+    messages.success(request, f'{producto.nombre_producto} se ha añadido al carrito.')
+    return redirect('carrito')
 
 def carrito(request):
     if request.user.is_authenticated:
-        carrito = Carrito.objects.get(usuario=request.user)
+        usuario = get_object_or_404(Usuario, correo=request.user.email)
+        carrito = get_object_or_404(Carrito, usuario=usuario)
         productos_carrito = CarritoProducto.objects.filter(carrito=carrito)
-        contexto = {"productos_carrito": productos_carrito}
-        return render(request, 'rsound/Carrito.html', contexto)
+        total = sum(item.producto.precio * item.cantidad for item in productos_carrito)
+        contexto = {"productos_carrito": productos_carrito, "total": total}
     else:
-        return redirect('iniciar_sesion')
+        contexto ={"productos_carrito": "", "total": 0}
+    return render(request, 'rsound/Carrito.html', contexto)
 
+def eliminar_del_carrito(request, item_id):
+    item = get_object_or_404(CarritoProducto, id=item_id)
+    item.delete()
+    messages.success(request, f'{item.producto.nombre_producto} se ha eliminado del carrito.')
+    return redirect('carrito')
 
+def pagar(request):
+    usuario = get_object_or_404(Usuario, correo=request.user.email)
+    carrito = get_object_or_404(Carrito, usuario=usuario)
+    productos_carrito = CarritoProducto.objects.filter(carrito=carrito)
+    total = sum(item.producto.precio * item.cantidad for item in productos_carrito)
+    if request.method == 'POST':
+        # Procesar pago aquí
+        carrito.productos.clear()
+        messages.success(request, 'Compra realizada con éxito.')
+        return redirect('inicio')
+    contexto = {"productos_carrito": productos_carrito, "total": total}
+    return render(request, 'rsound/Pagar.html', contexto)
