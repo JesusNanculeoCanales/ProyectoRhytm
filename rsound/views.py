@@ -488,6 +488,14 @@ def es_admin_funcion(request):
 
 User = get_user_model()
 
+def mercancia(request):
+    es_admin = False
+    if request.user.is_authenticated:
+        es_admin = es_admin_funcion(request)
+    productos = Producto.objects.all()
+    contexto = {"es_admin": es_admin, "productos": productos}
+    return render(request, 'rsound/Mercancia.html', contexto)
+
 def agregar_al_carrito(request, producto_id):
     usuario = get_object_or_404(Usuario, correo=request.user.email)
     carrito, created = Carrito.objects.get_or_create(usuario=usuario)
