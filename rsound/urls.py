@@ -1,9 +1,9 @@
 from django.urls import path
 from .views import (
-    artista,noticias,eventos,adminnoticia,eliminar_noticia,editar_noticia,registrar_noticia,listado_noticia,adminnoticia,listado_evento,eliminar_evento,editar_evento,registrar_evento,iniciar_sesion,editar_usuario_funcion,registrar_usuario_admin,pagEditar_usuario, paginicio, nosotros, listadoartistas, crear_artista, mercancia, novedades, registro, 
+    agregar_al_carrito,carrito,artista,noticias,eventos,adminnoticia,eliminar_noticia,editar_noticia,registrar_noticia,listado_noticia,adminnoticia,listado_evento,eliminar_evento,editar_evento,registrar_evento,iniciar_sesion,editar_usuario_funcion,registrar_usuario_admin,pagEditar_usuario, paginicio, nosotros, listadoartistas, crear_artista, mercancia, novedades, registro, 
     evento, noticia, aespa, smiths, jungkook, blur, newjeans, cerati, logout_view, 
     registrar_usuario, administracion, adminartistas, adminusuario, crear_usuario, listado_usuario, 
-    registrar_artista, crear_artista, listado_artista, editar_artista, eliminar_artista, eliminar_usuario, editar_usuario_funcion,adminevento
+    registrar_artista, crear_artista, listado_artista, editar_artista, eliminar_artista, eliminar_usuario, editar_usuario_funcion,adminevento,adminproductos,crear_producto,editar_producto,eliminar_producto
 )
 
 urlpatterns = [
@@ -56,19 +56,26 @@ urlpatterns = [
     path('evento/eliminar/<int:pk>/', eliminar_evento, name='eliminar_evento'),
     path('listado_evento/', listado_evento, name='listado_evento'),
 
-
-
     #ADMIN noticia.
     path('listado_noticia/', listado_noticia, name='listado_noticia'),
     path('noticia/crear/', registrar_noticia, name='crear_noticia'),
     path('noticia/editar/<int:pk>/', editar_noticia, name='editar_noticia'),
     path('noticia/eliminar/<int:pk>/', eliminar_noticia, name='eliminar_noticia'),
 
+    #ADMIN producto.
+    path('adminproductos/', adminproductos, name='adminproductos'),
+    path('crear_producto/', crear_producto, name='crear_producto'),
+    path('editar_producto/<int:id_producto>/', editar_producto, name='editar_producto'),
+    path('eliminar_producto/<int:id_producto>/', eliminar_producto, name='eliminar_producto'),
+
     #INICIO SESION
     path('iniciar_sesion', iniciar_sesion, name='iniciar_sesion'),
     path('logout/', logout_view, name='logout'),
 
- 
+    #
+    path('agregar_al_carrito/<int:producto_id>/', agregar_al_carrito, name='agregar_al_carrito'),
+    path('carrito/', carrito, name='carrito'),
+
 ]
 
 

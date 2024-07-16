@@ -1,0 +1,26 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Crear Producto - RhythmSound</title>
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/administracion.css' %}">
+{% endblock css %}
+
+{% block Contenido %}
+<div class="container mt-5">
+    <div class="mb-3">
+        <a href="{% url 'adminproductos' %}" class="btn btn-secondary">Volver</a>
+    </div>
+    <h2 class="colorblanco centrado">Registro Producto</h2>
+    <div class="fondoform">
+        <form action="{% url 'crear_producto' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+</div>
+{% endblock Contenido %}

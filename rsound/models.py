@@ -64,6 +64,27 @@ class Noticia(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+class Producto(models.Model):
+    idProducto = models.AutoField(primary_key=True, verbose_name='Id de Producto')
+    nombre_producto = models.CharField(max_length=100)
+    imagen = models.ImageField(upload_to="productos/")
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    artista = models.ForeignKey(Artista, on_delete=models.CASCADE, related_name='productos')
+
+    def __str__(self):
+        return self.nombre_producto
+
+class Carrito(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    productos = models.ManyToManyField(Producto, through='CarritoProducto')
+
+class CarritoProducto(models.Model):
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
+    
+    
 
     
 

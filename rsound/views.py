@@ -4,7 +4,8 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import Artista, Usuario, Rol, Evento, Noticia
+from .models import Artista, Usuario, Rol, Evento, Noticia, Producto, Carrito, CarritoProducto
+from .forms import ProductoForm
 
 # Vistas principales de la página
 def paginicio(request):
@@ -439,6 +440,41 @@ def listado_noticia(request):
     contexto = {"noticias": noticias}
     return render(request, 'rsound/Admin/listado_noticia.html', contexto)
 
+
+# Funciones para producto 
+
+def crear_producto(request):
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('adminproductos')
+    else:
+        form = ProductoForm()
+    return render(request, 'rsound/Admin/crear_producto.html', {'form': form})
+
+def editar_producto(request, id_producto):
+    producto = get_object_or_404(Producto, idProducto=id_producto)
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('adminproductos')
+    else:
+        form = ProductoForm(instance=producto)
+    return render(request, 'rsound/Admin/editar_producto.html', {'form': form, 'producto': producto})
+
+def eliminar_producto(request, id_producto):
+    producto = get_object_or_404(Producto, idProducto=id_producto)
+    if request.method == 'POST':
+        producto.delete()
+        return redirect('adminproductos')
+    return render(request, 'rsound/Admin/eliminar_producto.html', {'producto': producto})
+
+def adminproductos(request):
+    productos = Producto.objects.all()
+    return render(request, 'rsound/Admin/adminProductos.html', {'productos': productos})
+
 # Función extra para verificar si el usuario es administrador
 def es_admin_funcion(request):
     user = request.user
@@ -446,5 +482,36 @@ def es_admin_funcion(request):
     usuarioModel = Usuario.objects.get(correo=username)
     rolModel = usuarioModel.rol
     return rolModel.nombreRol == 'Admin'
+
+# carro de compras y productos
+
+def mercancia(request):
+    es_admin = False
+    if request.user.is_authenticated:
+        es_admin = es_admin_funcion(request)
+    productos = Producto.objects.all()
+    contexto = {"es_admin": es_admin, "productos": productos}
+    return render(request, 'rsound/Mercancia.html', contexto)
+
+def agregar_al_carrito(request, producto_id):
+    if request.user.is_authenticated:
+        carrito, created = Carrito.objects.get_or_create(usuario=request.user)
+        producto = get_object_or_404(Producto, idProducto=producto_id)
+        carrito_producto, created = CarritoProducto.objects.get_or_create(carrito=carrito, producto=producto)
+        if not created:
+            carrito_producto.cantidad += 1
+            carrito_producto.save()
+        return redirect('carrito')
+    else:
+        return redirect('iniciar_sesion')
+
+def carrito(request):
+    if request.user.is_authenticated:
+        carrito = Carrito.objects.get(usuario=request.user)
+        productos_carrito = CarritoProducto.objects.filter(carrito=carrito)
+        contexto = {"productos_carrito": productos_carrito}
+        return render(request, 'rsound/Carrito.html', contexto)
+    else:
+        return redirect('iniciar_sesion')
 
 
