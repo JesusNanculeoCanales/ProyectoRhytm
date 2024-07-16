@@ -1,0 +1,30 @@
+{% extends 'rsound/Plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Carrito de Compras - RhythmSound</title>
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/carrito.css' %}">
+{% endblock css %}
+
+{% block Contenido %}
+<div class="container-fluid">
+    <h1>Carrito de Compras</h1>
+    <div class="row">
+        {% for item in productos_carrito %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="{{ item.producto.imagen.url }}" class="card-img-top" alt="{{ item.producto.nombre_producto }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.producto.nombre_producto }}</h5>
+                    <p class="card-text">{{ item.producto.precio }}</p>
+                    <p class="card-text">Cantidad: {{ item.cantidad }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock Contenido %}
