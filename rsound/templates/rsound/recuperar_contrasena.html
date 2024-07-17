@@ -1,0 +1,45 @@
+{% load static %}
+
+<!--CSS-->
+{% block css %}
+<link rel="stylesheet" href="{% static 'rsound/css/modicontra.css' %}">
+{% endblock css %}
+
+{% block titulo %}
+<title>Recuperar Contraseña</title>
+{% endblock titulo %}
+
+
+{% block Contenido %}
+<div class="row fondo">
+    <div class="formulario">
+        <div class="row form-texto">
+            <div class="col-md-12 ">
+                <p>¿Olvidaste tu contraseña? Por favor, introduce tu correo electrónico.
+
+                    Recibirás un enlace para crear una contraseña nueva por correo electrónico.
+                </p>
+            </div>
+        </div>
+        <div class="row form-email">
+            <div class="col-md-12 ">
+                <form action="{% url 'password_reset' %}" method="POST" enctype="multipart/form-data" id="recuperarc">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="form-label">Correo electrónico:</label>
+                        <input class="form-control email" type="text" id="email" name="email" placeholder="Email..." required>
+                    </div>
+                    <p class="warnings" id="warningsemail"></p>
+                    <button type="submit" class="btn btn-primary">Restablecer Contraseña</button>
+                    <p class="warningsenviar" id="warnings"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock Contenido %}
+
+
+{% block js %}
+<script src="{% static 'rsound/js/recupecontra.js' %}"></script>
+{% endblock js %}

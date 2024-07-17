@@ -4,7 +4,7 @@ from .views import (
     evento, noticia, aespa, smiths, jungkook, blur, newjeans, cerati, logout_view, 
     registrar_usuario, administracion, adminartistas, adminusuario, crear_usuario, listado_usuario, 
     registrar_artista, crear_artista, listado_artista, editar_artista, eliminar_artista, eliminar_usuario, editar_usuario_funcion,adminevento,adminproductos,crear_producto,editar_producto,eliminar_producto,
-    agregar_al_carrito,carrito,eliminar_del_carrito,pagar,buscar_artistas
+    agregar_al_carrito,carrito,eliminar_del_carrito,pagar,buscar_artistas,recuperar_contrasena
 )
 
 urlpatterns = [
@@ -29,6 +29,7 @@ urlpatterns = [
     path('registro/', registro, name='registro'),
     path('registrar_usuario/', registrar_usuario, name='registrar_usuario'),
     path('buscar/',buscar_artistas, name='buscar_artistas'),
+    path('recuperar_contrasena/',recuperar_contrasena, name='recuperar_contrasena'),
     
     #ADMIN usuario.
     path('registrar_usuario_admin/',registrar_usuario_admin, name='registrar_usuario_admin'),

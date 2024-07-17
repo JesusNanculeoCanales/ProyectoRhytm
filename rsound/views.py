@@ -114,6 +114,9 @@ def newjeans(request):
 def blur(request):
     return render(request, 'rsound/artistas/blur.html')
 
+def recuperar_contrasena(request):
+    return render(request, 'rsound/recuperar_contrasena.html')
+
 # Vistas de administración
 def administracion(request):
     return render(request, 'rsound/Admin/administracion.html')
@@ -166,37 +169,44 @@ def logout_view(request):
     return redirect('inicio')
 
 def iniciar_sesion(request):
-    usuario1 = request.POST.get('usuario', '')
-    contra1 = request.POST.get('contra', '')
-    if not usuario1:
-        return redirect('inicio')
+    if request.method == 'POST':
+        usuario1 = request.POST.get('usuario', '')
+        contra1 = request.POST.get('contra', '')
 
-    try:
-        user1 = User.objects.get(username=usuario1)
-    except User.DoesNotExist:
-        messages.error(request, 'El usuario o la contraseña son incorrectas')
-        return redirect('inicio')
-
-    pass_valida = check_password(contra1, user1.password)
-    if not pass_valida:
-        messages.error(request, 'El usuario o la contraseña son incorrectas')
-        return redirect('inicio')
-
-    usuario2 = Usuario.objects.get(correo=usuario1)
-    user = authenticate(username=usuario1, password=contra1)
-
-    if user is not None:
-        login(request, user)
-        if usuario2.rol.nombreRol == "Admin":
-            usuario2.is_staff = True
-            usuario2.save()
-            return redirect('administracion')
-        else:
-            usuario2.is_staff = False
-            usuario2.save()
+        if not usuario1 or not contra1:
+            messages.error(request, 'Por favor, ingrese todos los campos.')
             return redirect('inicio')
-    else:
-        return redirect('inicio')
+
+        try:
+            user1 = User.objects.get(username=usuario1)
+        except User.DoesNotExist:
+            messages.error(request, 'El usuario o la contraseña son incorrectas.')
+            return redirect('inicio')
+
+        pass_valida = check_password(contra1, user1.password)
+        if not pass_valida:
+            messages.error(request, 'El usuario o la contraseña son incorrectas.')
+            return redirect('inicio')
+
+        usuario2 = Usuario.objects.get(correo=usuario1)
+        user = authenticate(username=usuario1, password=contra1)
+
+        if user is not None:
+            login(request, user)
+            if usuario2.rol.nombreRol == "Admin":
+                usuario2.is_staff = True
+                usuario2.save()
+                return redirect('administracion')
+            else:
+                usuario2.is_staff = False
+                usuario2.save()
+                return redirect('inicio')
+        else:
+            messages.error(request, 'El usuario o la contraseña son incorrectas.')
+            return redirect('inicio')
+    return render(request, 'rsound/login.html')
+
+
 
 def registrar_usuario(request):
     nombreUsu = request.POST['nickname']
