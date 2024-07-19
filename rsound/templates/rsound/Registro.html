@@ -18,61 +18,75 @@
 <div class="container mt-5">
   <!-- FORMULARIO -->
   <h2 class="colorblanco centrado">Formulario de Registro</h2>
-  <div class="fondoform">
-    <form id="registroForm" action="{% url 'registrar_usuario' %}" method="post">
-      {% csrf_token %}
-      <div class="mb-3">
-        <label for="name" class="form-label colorblanco">Nombres:</label>
-        <input type="text" class="form-control" id="name" name="name" required>
-        <span id="name-error" class="text-danger"></span>
-      </div>
-      <div class="mb-3">
-        <label for="apellido" class="form-label colorblanco">Apellidos:</label>
-        <input type="text" class="form-control" id="apellido" name="apellido" required>
-        <span id="apellido-error" class="text-danger"></span>
-      </div>
-      <div class="mb-3">
-        <label for="nickname" class="form-label colorblanco">Nombre de usuario:</label>
-        <input type="text" class="form-control" id="nickname" name="nickname" required>
-        <span id="nickname-error" class="text-danger"></span>
-      </div>
-      <div class="mb-3">
-        <label for="telefono" class="form-label colorblanco">Telefono (+56):</label>
-        <input type="number" class="form-control" id="telefono" name="telefono" required oninput="limitarInput.call(this, 9)">
-        <span id="telefono-error" class="text-danger"></span>
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label colorblanco">Correo Electrónico:</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-        <span id="email-error" class="text-danger"></span>
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label colorblanco">Contraseña:</label>
-        <div class="input-group">
-          <input type="password" class="form-control" id="password" name="password" required>
-          <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('password')">
-            <i class="fas fa-eye"></i>
-          </button>
+  <div class="fondoform-wrapper">
+    <div class="fondoform">
+      <form id="registroForm" action="{% url 'registrar_usuario' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="name" class="form-label colorblanco">Nombres:</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+          <span id="name-error" class="text-danger"></span>
         </div>
-        <span id="password-error" class="text-danger"></span>
-      </div>
-      <div class="mb-3">
-        <label for="password2" class="form-label colorblanco"> Repetir Contraseña:</label>
-        <div class="input-group">
-          <input type="password" class="form-control" id="password2" name="password2" required>
-          <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('password2')">
-            <i class="fas fa-eye"></i>
-          </button>
+        <div class="mb-3">
+          <label for="apellido" class="form-label colorblanco">Apellidos:</label>
+          <input type="text" class="form-control" id="apellido" name="apellido" required>
+          <span id="apellido-error" class="text-danger"></span>
         </div>
-        <span id="password2-error" class="text-danger"></span>
-      </div>
-      <button type="button" class="btn btn-primary" id="btnregistro" onclick="registrarUsuario(this)">Registrarse</button>
-    </form>
+        <div class="mb-3">
+          <label for="nickname" class="form-label colorblanco">Nombre de usuario:</label>
+          <input type="text" class="form-control" id="nickname" name="nickname" required>
+          <span id="nickname-error" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label colorblanco">Telefono (+56):</label>
+          <input type="number" class="form-control" id="telefono" name="telefono" required oninput="limitarInput.call(this, 9)">
+          <span id="telefono-error" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label colorblanco">Correo Electrónico:</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+          <span id="email-error" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label colorblanco">Contraseña:</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="password" name="password" required>
+            <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('password')">
+              <img src="{% static 'rsound/imagenes/eye.png' %}" id="password-icon" style="width:20px;">
+            </button>
+          </div>
+          <span id="password-error" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+          <label for="password2" class="form-label colorblanco">Repetir Contraseña:</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="password2" name="password2" required>
+            <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('password2')">
+              <img src="{% static 'rsound/imagenes/eye.png' %}" id="password2-icon" style="width:20px;">
+            </button>
+          </div>
+          <span id="password2-error" class="text-danger"></span>
+        </div>
+        <button type="button" class="btn btn-primary" id="btnregistro" onclick="registrarUsuario(this)">Registrarse</button>
+      </form>
+    </div>
   </div>
 </div>
 {% endblock Contenido %}
 
 {% block js %}
 <script src="{% static 'rsound/js/validacionesRegistro.js' %}" defer></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+  function togglePasswordVisibility(id) {
+    var passwordField = document.getElementById(id);
+    var passwordIcon = document.getElementById(id + '-icon');
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      passwordIcon.src = "{% static 'rsound/imagenes/eye-slash.png' %}";
+    } else {
+      passwordField.type = "password";
+      passwordIcon.src = "{% static 'rsound/imagenes/eye.png' %}";
+    }
+  }
+</script>
 {% endblock js %}

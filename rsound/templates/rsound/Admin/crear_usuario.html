@@ -10,10 +10,9 @@
 {% endblock css %}
 
 {% block Contenido %}
-
 <!-- Funcion spinner carga registro -->
 <div class="spinner-border" id="spinner" role="status">
-  <span class="visually-hidden">Loading...</span>
+  <span class="visualmente-oculto">Loading...</span>
 </div>
 <div class="fondospinner" id="fondito"></div>
 <div class="container mt-5">
@@ -45,14 +44,24 @@
       </div>
       <div class="mb-3">
         <label for="password" class="form-label colorblanco">Contraseña:</label>
-        <input type="password" class="form-control" id="password" name="password" required>
+        <div class="input-group">
+          <input type="password" class="form-control" id="password" name="password" required>
+          <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('password')">
+            <img src="{% static 'rsound/imagenes/eye.png' %}" id="password-icon" style="width:20px;">
+          </button>
+        </div>
       </div>
       <div class="mb-3">
-        <label for="password2" class="form-label colorblanco"> Repetir Contraseña:</label>
-        <input type="password" class="form-control" id="password2" name="password2" required>
+        <label for="password2" class="form-label colorblanco">Repetir Contraseña:</label>
+        <div class="input-group">
+          <input type="password" class="form-control" id="password2" name="password2" required>
+          <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('password2')">
+            <img src="{% static 'rsound/imagenes/eye.png' %}" id="password2-icon" style="width:20px;">
+          </button>
+        </div>
       </div>
       <div class="mb-3">
-        <label for="rol" class="form-label colorblanco"> Rol:</label>
+        <label for="rol" class="form-label colorblanco">Rol:</label>
         <select class="form-select" aria-label="Default select example" name="rol">
           <option selected>Elige un rol</option>
           {% for r in roles %}
@@ -67,7 +76,19 @@
 </div>
 {% endblock Contenido %}
 
-
 {% block js %}
 <script src="{% static 'rsound/js/validacionesRegistro.js' %}" defer></script>
+<script>
+  function togglePasswordVisibility(id) {
+    var passwordField = document.getElementById(id);
+    var passwordIcon = document.getElementById(id + '-icon');
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      passwordIcon.src = "{% static 'rsound/imagenes/eye-slash.png' %}";
+    } else {
+      passwordField.type = "password";
+      passwordIcon.src = "{% static 'rsound/imagenes/eye.png' %}";
+    }
+  }
+</script>
 {% endblock js %}
