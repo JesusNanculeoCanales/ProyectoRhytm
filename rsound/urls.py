@@ -7,6 +7,10 @@ from .views import (
     agregar_al_carrito,carrito,eliminar_del_carrito,pagar,buscar_artistas,recuperar_contrasena
 )
 
+# Aquí importamos todas las vistas que vamos a usar en las URLs. 
+# Cada vista corresponde a una función o clase 
+# que maneja la lógica para una URL específica.
+
 urlpatterns = [
 
     # HTML VISTA USUARIO
@@ -84,8 +88,10 @@ urlpatterns = [
 ]
 
 
-
-
+# EJ:
+#path('adminproductos/',  es la ruta de la URL.
+# adminproductos,  es la vista que se llama cuando se accede a esa URL.
+# name='adminproductos'), es un nombre para referenciar la URL en otros lugares de tu código.
 
 
 

@@ -1,54 +1,55 @@
-const form_registro = document.getElementById("registroForm")
-const btnregistro = document.getElementById("btnregistro")
+const form_registro = document.getElementById("registroForm")  // Selecciona el formulario de registro
+const btnregistro = document.getElementById("btnregistro")  // Selecciona el botón de registro
 
+// Función principal para registrar un usuario
 function registrarUsuario(elemento) {
-  var formRegistroValido = true;
+  var formRegistroValido = true;  // Indicador de validación del formulario
 
-  const nombre = document.getElementById('name').value;
-  const apellido = document.getElementById('apellido').value;
-  const nickname = document.getElementById('nickname').value;
-  const telefono = document.getElementById('telefono').value;
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const password2 = document.getElementById('password2').value;
+  const nombre = document.getElementById('name').value;  // Obtiene el valor del campo nombre
+  const apellido = document.getElementById('apellido').value;  // Obtiene el valor del campo apellido
+  const nickname = document.getElementById('nickname').value;  // Obtiene el valor del campo nickname
+  const telefono = document.getElementById('telefono').value;  // Obtiene el valor del campo telefono
+  const email = document.getElementById('email').value;  // Obtiene el valor del campo email
+  const password = document.getElementById('password').value;  // Obtiene el valor del campo contraseña
+  const password2 = document.getElementById('password2').value;  // Obtiene el valor del campo repetir contraseña
 
-  // Validación de Vacios
+  // Validación de campos vacíos
   if (!nombre || !apellido || !nickname || !telefono || !email || !password || !password2) {
-    toastTextoColor('Campos Vacios 😅', 2)
+    toastTextoColor('Campos Vacios 😅', 2)  // Muestra mensaje de campos vacíos
     formRegistroValido = false;
   } else {
     var validacionCorreo = true;
     var validacionClave = true;
 
-    // Validación de Nickname
+    // Validación de longitud del nickname
     if (nickname.length < 3 && formRegistroValido) {
-      toastTextoColor('Nickname menor a 3 caracteres 🥱', 2)
+      toastTextoColor('Nickname menor a 3 caracteres 🥱', 2)  // Muestra mensaje si el nickname es menor a 3 caracteres
       formRegistroValido = false;
     } else if (nickname.length > 15) {
-      toastTextoColor('Nickname mayor a 15 caracteres 🥱', 2)
+      toastTextoColor('Nickname mayor a 15 caracteres 🥱', 2)  // Muestra mensaje si el nickname es mayor a 15 caracteres
       formRegistroValido = false;
     }
 
-    // Validación de Clave (1 Digito, 1 Mayuscula, 8 - 15 caracteres)
-    validacionClave = validarClave(password);
-    // Validación de Correo
-    validacionCorreo = validarFormatoCorreo(email);
+    // Validación de la clave
+    validacionClave = validarClave(password);  // Verifica la validez de la contraseña
+    validacionCorreo = validarFormatoCorreo(email);  // Verifica la validez del correo electrónico
 
-    // Validación de Clave
+    // Validación de coincidencia de contraseñas
     if (password !== password2 && formRegistroValido) {
-      toastTextoColor('Las contraseñas no coinciden 😘', 2)
+      toastTextoColor('Las contraseñas no coinciden 😘', 2)  // Muestra mensaje si las contraseñas no coinciden
       formRegistroValido = false;
     }
 
-    // "ENVIAR" FORMULARIO
+    // Enviar el formulario si todas las validaciones son correctas
     if (formRegistroValido && validacionClave && validacionCorreo) {
-      aparecerCarga()
-      toastTextoColor('Registrado 😘', 1)
-      form_registro.submit()
+      aparecerCarga()  // Muestra spinner de carga
+      toastTextoColor('Registrado 😘', 1)  // Muestra mensaje de éxito
+      form_registro.submit()  // Envía el formulario
     }
   }
 }
 
+// Función para mostrar el spinner de carga
 function aparecerCarga() {
   const spinner = document.getElementById("spinner")
   const fondo = document.getElementById("fondito")
@@ -57,18 +58,21 @@ function aparecerCarga() {
   setTimeout(function () {
     spinner.style.display = "none"
     fondo.style.display = "none"
-  }, 3000)
+  }, 3000)  // Oculta el spinner después de 3 segundos
 }
 
+// Función para limitar la longitud del input
 function limitarInput(maxLength) {
   if (this.value.length > maxLength) {
-    this.value = this.value.slice(0, maxLength);
+    this.value = this.value.slice(0, maxLength);  // Limita la longitud del input
   }
 }
 
 /* TOASTS */
-var texto_toast = document.getElementById('texto-toast');
-var toast = document.getElementById('liveToast');
+var texto_toast = document.getElementById('texto-toast');  // Selecciona el contenedor del texto del toast
+var toast = document.getElementById('liveToast');  // Selecciona el toast
+
+// Función para abrir un toast
 function abrirToast(texto) {
   toast.querySelector('.toast-body').textContent = texto;
   var toastElList = [].slice.call(document.querySelectorAll('.toast'))
@@ -76,10 +80,11 @@ function abrirToast(texto) {
     return new bootstrap.Toast(toastEl)
   })
   toastList.forEach(toast => {
-    toast.show()
+    toast.show()  // Muestra el toast
   })
 }
 
+// Función para cambiar el color del toast
 function toggleToastColor(numero) {
   if (numero == 1 && !toast.classList.contains('text-bg-success')) {
     toast.classList.remove('text-bg-danger');
@@ -90,29 +95,33 @@ function toggleToastColor(numero) {
   }
 }
 
+// Función para mostrar el toast con el texto y color especificados
 function toastTextoColor(texto, color) {
   abrirToast(texto)
   toggleToastColor(color);
 }
 
+// Función para validar el formato del correo
 function validarFormatoCorreo(correo) {
   var patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const resultado = patronCorreo.test(correo);
   if (!resultado) {
-    toastTextoColor('Correo Inválido 😒', 2)
+    toastTextoColor('Correo Inválido 😒', 2)  // Muestra mensaje si el correo no es válido
   }
   return resultado;
 }
 
+// Función para validar la clave
 function validarClave(clave) {
   var patronClave = /^(?=.*[A-Z])(?=.*\d).{8,15}$/;
   const resultado = patronClave.test(clave);
   if (!resultado) {
-    toastTextoColor('Contraseña Inválida 🥵', 2)
+    toastTextoColor('Contraseña Inválida 🥵', 2)  // Muestra mensaje si la contraseña no es válida
   }
   return resultado;
 }
 
+// Función para alternar la visibilidad de la contraseña
 function togglePasswordVisibility(id) {
   const input = document.getElementById(id);
   const type = input.getAttribute('type') === 'password' ? 'text' : 'password';

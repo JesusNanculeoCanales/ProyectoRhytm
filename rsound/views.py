@@ -8,15 +8,15 @@ from django.contrib.auth.models import User
 from .models import Artista, Usuario, Rol, Evento, Noticia, Producto, Carrito, CarritoProducto
 from .forms import ProductoForm
 
-# Vistas principales de la página
+# VISTAS PRINCIPALES DE LA PAGINA
 def paginicio(request):
     es_admin = False
-    if request.user.is_authenticated:
+    if request.user.is_authenticated: # Verifica si el usuario autenticado es administrador
         es_admin = es_admin_funcion(request)
-    eventos = Evento.objects.order_by('?').first()
-    noticia = Noticia.objects.order_by('?').first()
+    eventos = Evento.objects.order_by('?').first() # Selecciona un evento aleatorio de la base de datos
+    noticia = Noticia.objects.order_by('?').first() # Selecciona una noticia aleatoria de la base de datos
     contexto = {"es_admin": es_admin, 'eventos':eventos,'noticia':noticia}
-    return render(request, 'rsound/Index.html', contexto)
+    return render(request, 'rsound/Index.html', contexto) # Renderiza la plantilla Index.html con el contexto proporcionado
 
 def nosotros(request):
     es_admin = False
@@ -163,60 +163,68 @@ def pagEditar_usuario(request, id_usuario):
     contexto = {"id_usuario": id_usuario, "usuario": usuarioAEditar, "roles": roles}
     return render(request, 'rsound/Admin/editar_usuario.html', contexto)
 
-# Funciones de autenticación
+# FUNCIONES DE AUTENTICACION
 def logout_view(request):
-    logout(request)
-    return redirect('inicio')
+    logout(request) # Cierra la sesión del usuario actual
+    return redirect('inicio')  # Redirige al usuario a la página de inicio
 
 def iniciar_sesion(request):
     if request.method == 'POST':
+        # Obtiene los datos del formulario POST enviados por el usuario
         usuario1 = request.POST.get('usuario', '')
         contra1 = request.POST.get('contra', '')
 
+# Verifica si los campos de usuario y contraseña están vacíos
         if not usuario1 or not contra1:
             messages.error(request, 'Por favor, ingrese todos los campos.')
             return redirect('inicio')
-
+        
+# Intenta obtener el usuario del modelo User de Django
         try:
             user1 = User.objects.get(username=usuario1)
         except User.DoesNotExist:
-            messages.error(request, 'El usuario o la contraseña son incorrectas.')
+            messages.error(request, 'El usuario o la contraseña son incorrectas.')   # Si el usuario no existe, muestra un mensaje de error
             return redirect('inicio')
-
+        
+# Verifica si la contraseña proporcionada es correcta
         pass_valida = check_password(contra1, user1.password)
         if not pass_valida:
             messages.error(request, 'El usuario o la contraseña son incorrectas.')
             return redirect('inicio')
-
-        usuario2 = Usuario.objects.get(correo=usuario1)
+        
+# Obtiene el usuario del modelo personalizado Usuario
+        usuario2 = get_object_or_404(Usuario, correo=usuario1)
         user = authenticate(username=usuario1, password=contra1)
 
         if user is not None:
             login(request, user)
             if usuario2.rol.nombreRol == "Admin":
-                usuario2.is_staff = True
+                usuario2.is_staff = True # Asigna permisos de administrador si es Admin
                 usuario2.save()
                 return redirect('administracion')
             else:
-                usuario2.is_staff = False
+                usuario2.is_staff = False # No asigna permisos de administrador
                 usuario2.save()
                 return redirect('inicio')
         else:
-            messages.error(request, 'El usuario o la contraseña son incorrectas.')
+            messages.error(request, 'El usuario o la contraseña son incorrectas.')  # Si la autenticación falla, muestra un mensaje de error
             return redirect('inicio')
     return render(request, 'rsound/login.html')
 
 
 
 def registrar_usuario(request):
+    # Obtiene los datos del formulario POST enviados por el usuario.
     nombreUsu = request.POST['nickname']
     nombres = request.POST['name']
     apellido = request.POST['apellido']
     correoU = request.POST['email']
     claveU = request.POST['password']
     telefonoU = request.POST['telefono']
+    # Obtiene el objeto Rol correspondiente al rol de "Usuario".
     rol = Rol.objects.get(nombreRol="Usuario")
 
+# Crea un nuevo objeto Usuario con los datos proporcionados y lo guarda en la base de datos.
     Usuario.objects.create(
         nombreUsuario=nombreUsu,
         nombre=nombres,
@@ -227,7 +235,7 @@ def registrar_usuario(request):
         fechacreacion=timezone.now(),
         rol=rol
     )
-
+# Crea un nuevo objeto User para el sistema de autenticación de Django.
     user = User.objects.create_user(
         username=correoU,
         email=correoU,
@@ -237,7 +245,7 @@ def registrar_usuario(request):
     user.last_name = apellido
     user.is_staff = False
     user.save()
-
+# Redirige al usuario a la página de inicio después de registrarse.
     return redirect('inicio')
 
 def registrar_usuario_admin(request):
@@ -248,9 +256,10 @@ def registrar_usuario_admin(request):
     claveU = request.POST['password']
     telefonoU = request.POST['telefono']
     rol = request.POST['rol']
-
+ # Obtiene el objeto Rol basado en el idRol.
     rolModels = Rol.objects.get(idRol=rol)
 
+ #Crea un nuevo objeto Usuario con los datos proporcionados y lo guarda en la base de datos.
     Usuario.objects.create(
         nombreUsuario=nombreUsu,
         nombre=nombres,
@@ -262,6 +271,7 @@ def registrar_usuario_admin(request):
         rol=rolModels
     )
 
+# Crea un nuevo objeto User para el sistema de autenticación de Django.
     user = User.objects.create_user(
         username=correoU,
         email=correoU,
@@ -273,10 +283,11 @@ def registrar_usuario_admin(request):
     if rol == 2:
         user.is_staff = True
     user.save()
-
+    
+# Redirige al administrador a la página de administración de usuarios.
     return redirect('adminusuario')
 
-# Funciones para artistas
+# FUNCIONES DE ARTISTA
 def registrar_artista(request):
     nombreArt = request.POST['nameartista']
     image = request.FILES.get('imagen', None)
@@ -488,24 +499,32 @@ def adminproductos(request):
 
 # Función extra para verificar si el usuario es administrador
 def es_admin_funcion(request):
+# Obtiene el objeto de usuario desde el request.
     user = request.user
+# Obtiene el nombre de usuario del usuario autenticado.
     username = user.username
     usuarioModel = Usuario.objects.get(correo=username)
     rolModel = usuarioModel.rol
+ # Devuelve True si el nombre del rol es 'Admin', de lo contrario, devuelve False.
     return rolModel.nombreRol == 'Admin'
 
-# carro de compras y productos
+#CARRO DE COMPRA Y PRODUCTOS
 
 User = get_user_model()
 
+# Vista para mostrar la página de mercancía
 def mercancia(request):
     es_admin = False
     if request.user.is_authenticated:
         es_admin = es_admin_funcion(request)
+ # Obtiene todos los productos de la base de datos
     productos = Producto.objects.all()
     contexto = {"es_admin": es_admin, "productos": productos}
     return render(request, 'rsound/Mercancia.html', contexto)
+  # Obtiene todos los productos y los pasa al contexto para ser renderizados en la plantilla.
 
+
+# Esta función permite a los usuarios agregar productos a su carrito.
 def agregar_al_carrito(request, producto_id):
     usuario = get_object_or_404(Usuario, correo=request.user.email)
     carrito, created = Carrito.objects.get_or_create(usuario=usuario)
@@ -517,6 +536,8 @@ def agregar_al_carrito(request, producto_id):
     messages.success(request, f'{producto.nombre_producto} se ha añadido al carrito.')
     return redirect('carrito')
 
+# Esta función renderiza la página del carrito de compras.
+# Calcula el total del precio de los productos en el carrito.
 def carrito(request):
     if request.user.is_authenticated:
         usuario = get_object_or_404(Usuario, correo=request.user.email)
@@ -528,12 +549,15 @@ def carrito(request):
         contexto ={"productos_carrito": "", "total": 0}
     return render(request, 'rsound/Carrito.html', contexto)
 
+# Esta función permite a los usuarios eliminar productos de su carrito.
 def eliminar_del_carrito(request, item_id):
     item = get_object_or_404(CarritoProducto, id=item_id)
     item.delete()
     messages.success(request, f'{item.producto.nombre_producto} se ha eliminado del carrito.')
     return redirect('carrito')
 
+ # Esta función gestiona el proceso de pago.
+ # Obtiene el carrito del usuario y calcula el total.
 def pagar(request):
     usuario = get_object_or_404(Usuario, correo=request.user.email)
     carrito = get_object_or_404(Carrito, usuario=usuario)
@@ -549,10 +573,13 @@ def pagar(request):
 
 
 # BUSCAR
-
+#SOLO BUSCA LOS ARTISTAS NADA MAS
 def buscar_artistas(request):
+     # Obtiene la consulta de búsqueda del parámetro 'q' de la URL
     query = request.GET.get('q', '')
+     # Filtra los artistas cuyo nombre contenga la consulta de búsqueda
     resultados = Artista.objects.filter(nombreArtista__icontains=query)
+     # Prepara el contexto con los resultados de la búsqueda y la consulta original
     contexto = {
         'resultados': resultados,
         'query': query

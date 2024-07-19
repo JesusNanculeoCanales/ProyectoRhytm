@@ -18,6 +18,7 @@
 <div class="container mt-5">
   <!-- FORMULARIO -->
   <h2 class="colorblanco centrado">Formulario de Registro</h2>
+  <h5 class="colorblanco centrado">Se parte de nuestra comunidad! :D</h5>
   <div class="fondoform-wrapper">
     <div class="fondoform">
       <form id="registroForm" action="{% url 'registrar_usuario' %}" method="post">
@@ -77,13 +78,17 @@
 {% block js %}
 <script src="{% static 'rsound/js/validacionesRegistro.js' %}" defer></script>
 <script>
+  // Función que alterna la visibilidad de la contraseña
   function togglePasswordVisibility(id) {
+    // Obtiene el campo de entrada de contraseña usando su ID
     var passwordField = document.getElementById(id);
     var passwordIcon = document.getElementById(id + '-icon');
+    // Verifica si el tipo del campo de contraseña es 'password'
     if (passwordField.type === "password") {
       passwordField.type = "text";
       passwordIcon.src = "{% static 'rsound/imagenes/eye-slash.png' %}";
     } else {
+     // Si es 'text', cambia el tipo a 'password' para ocultar la contraseña
       passwordField.type = "password";
       passwordIcon.src = "{% static 'rsound/imagenes/eye.png' %}";
     }

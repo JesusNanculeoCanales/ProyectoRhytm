@@ -1,13 +1,13 @@
-{% extends 'rsound/Plantilla.html' %}
-{% load static %}
+{% extends 'rsound/Plantilla.html' %} <!-- Esta línea indica que la plantilla actual hereda de Plantilla.html en el directorio rsound. -->
+{% load static %} <!-- Habilita el uso de archivos estáticos como CSS y JavaScript en la plantilla.-->
 {% block titulo %}
 <title>{{ artista.nombreArtista }}</title>
 {% endblock titulo %}
 {% block css %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Incluye la biblioteca jQuery en la plantilla. -->
 {% endblock css %}
 
-{% block Contenido %}
+{% block Contenido %}  <!--Define un bloque llamado 'Contenido' que puede ser sobrescrito en la plantilla base. -->
 <div class="titulo">
   <h1>{{ artista.nombreArtista }}</h1>
 </div>
@@ -16,7 +16,7 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="3000">
-      <img src="{{ artista.imagen.url }}" class="d-block w-100" alt="{{ artista.nombreArtista }}">
+      <img src="{{ artista.imagen.url }}" class="d-block w-100" alt="{{ artista.nombreArtista }}"> <!-- Muestra una imagen del artista en un carrusel Bootstrap -->
     </div>
   </div>
 </div>
@@ -26,8 +26,8 @@
   <h3>Discografía</h3>
   <p>{{ artista.discografiaArtista }}</p>
   <h3>Recopilatorio</h3>
-  <p>{{ artista.recopilatorioArtista }}</p>
-  <h3>Biografía</h3>
+  <p>{{ artista.recopilatorioArtista }}</p> <!-- se extraen del objeto Artista pasado a la plantilla                                          
+  <h3>Biografía</h3>                        desde la vista. Django usa estas variables para acceder a los campos del objeto y mostrarlos en la página web renderizada. -->
   <p>{{ artista.biografiaArtista }}</p>
 </div>
 
@@ -36,6 +36,6 @@
   <iframe width="100%" height="500" src="{{ artista.video }}"
     title="video del artista" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen></iframe>
+    allowfullscreen></iframe>  <!--Muestra un video del artista usando un iframe. -->
 </div>
 {% endblock Contenido %}
